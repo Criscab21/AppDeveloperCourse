@@ -1,10 +1,13 @@
 import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
 import {useFonts} from "expo-font";
 import fonts, { fontCollection } from '../utils/globals/fonts';
-import { useState } from 'react';
 import { AntDesign, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 
 export const Header = ({navigation}) => {
+
+    const [fontsLoaded] = useFonts(fontCollection);
+    if(!fontsLoaded) return null;
+
     return(
         <View style={styles.headercontainer}>
             <View style={styles.title}>
@@ -23,7 +26,7 @@ export const Header = ({navigation}) => {
                 <Pressable onPress={() => navigation.navigate("Home")}>                        
                     <Text style={styles.linkText}>Gastos</Text>                                
                 </Pressable>                
-                <Pressable onPress={() => navigation.navigate("Ingresos")}>
+                <Pressable onPress={() => navigation.navigate("HomeIngresos")}>
                     <Text style={styles.linkText}>Ingresos</Text>                
                 </Pressable>
             </View>

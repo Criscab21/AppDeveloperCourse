@@ -1,16 +1,23 @@
 import { Button, StyleSheet, Text, View } from 'react-native';
 import Home from './src/Components/Home';
+import  HomeIngresos from './src/Components/HomeIngresos';
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Gastos from './src/Components/Gastos';
 import { Header } from './src/Components/Header';
-import { Ingresos } from './src/Components/Ingresos';
+import Ingresos from './src/Components/Ingresos';
 
 const Stack = createNativeStackNavigator();
 
 const HomeScreen = ({navigation}) => {
   return (    
     <Home navigation={navigation}/>
+  )
+}
+
+const HomeIngresosScreen = ({navigation}) => {
+  return (
+    <HomeIngresos navigation={navigation}/>
   )
 }
 
@@ -25,6 +32,7 @@ const IngresosScreen = () => {
     <Ingresos/>
   )
 }
+
 
 export default function App() {    
 
@@ -43,6 +51,7 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen}/>
         <Stack.Screen name="Gastos" component={GastosScreen}/>               
         <Stack.Screen name="Ingresos" component={IngresosScreen}/>               
+        <Stack.Screen name="HomeIngresos" component={HomeIngresosScreen}/>               
       </Stack.Navigator>
     </NavigationContainer>
   );

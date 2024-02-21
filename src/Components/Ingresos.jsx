@@ -4,7 +4,7 @@ import uuid from 'react-native-uuid';
 import categories from '../utils/data/categories.json';
 
 
-export const Ingresos = () => {
+export default function Ingresos () {
     const [newSpent, setNewSpent] = useState({        
         price: "",        
         category: "",
@@ -27,13 +27,10 @@ export const Ingresos = () => {
             id: ""
         })          
     }
-    
-    const onHandlerPrice = (p) => {
-        setNewSpent({...newSpent, price:p});
-    }
 
-    const onHandlerPayment = (p) => {
-        setNewSpent({...newSpent, paymentMethod:p});
+    const onHandlerPrice = (p) => {
+        const id = uuid.v4();
+        setNewSpent({...newSpent, price:p, id:id});
     }
 
     const onHandlerCategory = (c) => {
@@ -64,7 +61,7 @@ export const Ingresos = () => {
                     placeholder='Ingrese la categoria' 
                     placeholderTextColor={"#0a210f"}
                 />            
-                <Button title='Añadir transaccion' onPress={addSpent}/>
+                <Button title='Añadir Ingreso' onPress={addSpent}/>
             </View>
             <ScrollView style={styles.flatlistCard}>
                 <FlatList
@@ -76,7 +73,7 @@ export const Ingresos = () => {
                                 Categoria: {item.category}                                
                             </Text>
                             <Text style={styles.textCard}>
-                                {item.price} $                                
+                                {item.price} $                         
                             </Text>
                             <Pressable>                                                           
                                 <Button title='DEL' onPress={() => deleteItem(item.id)}/>

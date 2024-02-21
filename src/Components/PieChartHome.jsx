@@ -3,7 +3,7 @@ import { TextInput, View, Button, Text, ScrollView, FlatList, StyleSheet, Pressa
 import PieChart from 'react-native-pie-chart';
 
 
-export default function PieChartHome () {
+export default function PieChartHome ({title}) {
 
     const widthAndHeight = 200; 
     const sliceColor = ['red', 'blue', 'yellow', 'green'];
@@ -18,7 +18,7 @@ export default function PieChartHome () {
     return(
         <View style={styles.container}>
             <Text style={styles.titleContainer}>
-                Gastos del mes
+                {title}
             </Text>
             <View style={styles.chart}>
                 <PieChart

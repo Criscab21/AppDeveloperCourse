@@ -2,14 +2,14 @@ import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
 import PieChartHome from './PieChartHome';
 import { AntDesign, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 
-export default function Home ({navigation}) {    
+export default function HomeIngresos ({navigation}) {   
         
     return(             
         <View style={styles.container}>            
             <View style={styles.piechartcontainer}>
-                <PieChartHome title="Gastos"/>
+                <PieChartHome title="Ingresos"/>
                 <View style={styles.plusButtonContainer}>                    
-                    <Pressable onPress={() => navigation.navigate("Gastos")}>
+                    <Pressable onPress={() => navigation.navigate("Ingresos")}>
                         <MaterialCommunityIcons name='plus-circle-multiple' size={45} color="green"/>
                     </Pressable>            
                 </View>
