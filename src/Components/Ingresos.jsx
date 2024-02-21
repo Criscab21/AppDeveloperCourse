@@ -4,12 +4,9 @@ import uuid from 'react-native-uuid';
 import categories from '../utils/data/categories.json';
 
 
-export default function Gastos () {          
-        
-    const [newSpent, setNewSpent] = useState({
-        title: "",
-        price: "",
-        paymentMethod: "",
+export const Ingresos = () => {
+    const [newSpent, setNewSpent] = useState({        
+        price: "",        
         category: "",
         id: ""
     })
@@ -24,20 +21,13 @@ export default function Gastos () {
 
     const addSpent = () => {        
         setSpent([...spents, newSpent])
-        setNewSpent({
-            title: "",
-            price: "",
-            paymentMethod: "",
+        setNewSpent({            
+            price: "",            
             category: "",
             id: ""
         })          
     }
-
-    const onHandlerTitle = (t) => {
-        const id = uuid.v4();
-        setNewSpent({...newSpent, title:t, id:id});
-    }
-
+    
     const onHandlerPrice = (p) => {
         setNewSpent({...newSpent, price:p});
     }
@@ -59,19 +49,12 @@ export default function Gastos () {
     return (
         
         <View style={styles.container}>                                                
-            <View style={styles.inputCard}>
-                <TextInput 
-                    style={styles.input} 
-                    value={newSpent.title} 
-                    onChangeText={onHandlerTitle} 
-                    placeholder='Ingrese el gasto' 
-                    placeholderTextColor={"#0a210f"}
-                />            
+            <View style={styles.inputCard}>                     
                 <TextInput 
                     style={styles.input} 
                     value={newSpent.price} 
                     onChangeText={onHandlerPrice} 
-                    placeholder='Ingrese el monto' 
+                    placeholder='ARS' 
                     placeholderTextColor={"#0a210f"}
                 />            
                 <TextInput 
@@ -88,15 +71,12 @@ export default function Gastos () {
                     data={spents}
                     keyExtractor={item => item.id}
                     renderItem={({item}) => (
-                        <View style={styles.card}>
-                            <Text style={styles.textCard}>
-                                Titulo: {item.title}                                
-                            </Text>
+                        <View style={styles.card}>                            
                             <Text style={styles.textCard}>
                                 Categoria: {item.category}                                
                             </Text>
                             <Text style={styles.textCard}>
-                                Precio: $ {item.price}                                
+                                {item.price} $                                
                             </Text>
                             <Pressable>                                                           
                                 <Button title='DEL' onPress={() => deleteItem(item.id)}/>
@@ -109,6 +89,7 @@ export default function Gastos () {
         
     )
 }
+
 
 const styles = StyleSheet.create({
     container: {        
