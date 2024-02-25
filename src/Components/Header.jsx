@@ -10,26 +10,22 @@ export const Header = ({navigation}) => {
 
     return(
         <View style={styles.headercontainer}>
-            <View style={styles.title}>
-                {navigation.canGoBack() && 
-                    <Pressable onPress={() => navigation.goBack()}>
-                        <AntDesign name='arrowleft' size={25} color={'silver'}/>
+            <View style={styles.titleContainer}>
+                <View style={styles.arrowleft}>
+                    {navigation.canGoBack() && 
+                        <Pressable onPress={() => navigation.goBack()}>
+                            <AntDesign name='arrowleft' size={25} color={'silver'}/>
+                        </Pressable>
+                        }                    
+                </View>
+                <View style={styles.title}>
+                    <Pressable >                        
+                        <Text style={styles.text}>
+                            Gestor de Gastos
+                        </Text>
                     </Pressable>
-                    }
-                <Pressable >                        
-                    <Text style={styles.text}>
-                        Gestor de Gastos
-                    </Text>
-                </Pressable>
-            </View>
-            <View style={styles.linksContainer}>
-                <Pressable onPress={() => navigation.navigate("Home")}>                        
-                    <Text style={styles.linkText}>Gastos</Text>                                
-                </Pressable>                
-                <Pressable onPress={() => navigation.navigate("HomeIngresos")}>
-                    <Text style={styles.linkText}>Ingresos</Text>                
-                </Pressable>
-            </View>
+                </View>
+            </View>            
         </View>
     )
 }
@@ -41,12 +37,18 @@ const styles = StyleSheet.create({
         backgroundColor:"#F0F4EF",         
         borderWidth:3,                     
     },     
-    title: {
-        paddingHorizontal:"3%",
+    titleContainer: {        
         flexDirection:"row", 
         height: 80,         
         backgroundColor:"#14591d",        
         alignItems:"center",        
+    },
+    title: {
+        marginRight:"25%"
+    },
+    arrowleft: {
+        width:"7%",
+        paddingLeft:"1%"
     },
     linksContainer: {      
         paddingHorizontal:"1%",         
@@ -65,6 +67,12 @@ const styles = StyleSheet.create({
         fontSize:18,       
         paddingHorizontal:"15%",
         fontFamily:fonts.DosisBold
+    }, 
+    linktextfocused: {
+        borderColor:"#F0F4EF",
+        borderWidth:0,
+        borderBottomWidth: 1,
+        color:"white",        
     },  
     text:{                         
         height:"100%",

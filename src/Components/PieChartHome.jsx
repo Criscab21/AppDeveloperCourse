@@ -26,7 +26,7 @@ export default function PieChartHome ({title}) {
                     series={categoryCount}
                     sliceColor={sliceColor}
                     coverRadius={0.60}
-                    coverFill={'#5D21D0'}
+                    coverFill={'gray'}
                 />
             </View>
         </View>

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { TextInput, View, Button, Text, ScrollView, FlatList, StyleSheet, Pressable } from 'react-native'
 import uuid from 'react-native-uuid';
 import categories from '../utils/data/categories.json';
+import { FontAwesome } from '@expo/vector-icons'
 
 
 export default function Gastos () {          
@@ -89,18 +90,22 @@ export default function Gastos () {
                     keyExtractor={item => item.id}
                     renderItem={({item}) => (
                         <View style={styles.card}>
-                            <Text style={styles.textCard}>
-                                Titulo: {item.title}                                
-                            </Text>
-                            <Text style={styles.textCard}>
-                                Categoria: {item.category}                                
-                            </Text>
-                            <Text style={styles.textCard}>
-                                Precio: $ {item.price}                                
-                            </Text>
-                            <Pressable>                                                           
-                                <Button title='DEL' onPress={() => deleteItem(item.id)}/>
-                            </Pressable>
+                            <View style={styles.textcard}>
+                                <Text style={styles.text}>
+                                    Titulo: {item.title}                                
+                                </Text>
+                                <Text style={styles.text}>
+                                    Categoria: {item.category}                                
+                                </Text>
+                                <Text style={styles.text}>
+                                    Precio: $ {item.price}                                
+                                </Text>
+                            </View>
+                            <View>
+                                <Pressable onPress={() => deleteItem(item.id)}>                                                           
+                                    <FontAwesome name='trash' size={30}/>
+                                </Pressable>
+                            </View>
                         </View>
                     )}
                 />      
@@ -131,7 +136,7 @@ const styles = StyleSheet.create({
         paddingHorizontal:10,
     },
     flatlistCard: {
-        marginBottom:"10%",        
+        marginBottom:"26%",        
         paddingVertical:10 ,
     },
     card: {
@@ -142,12 +147,12 @@ const styles = StyleSheet.create({
         paddingVertical:5,
         marginBottom:20,
 
-    },
-    buttonCard: {
-        marginVertical: 2,        
-    },  
+    },    
     textCard: {
+        alignItems:'center'
+    },
+    text: {
         color:"#b4cded",
         fontSize: 15,
-    },
+    }
 })
