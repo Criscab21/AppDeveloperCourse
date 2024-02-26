@@ -1,19 +1,48 @@
-import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
+import { TextInput, View, Button, Text, ScrollView, FlatList, StyleSheet, Pressable } from 'react-native'
 import PieChartHome from './PieChartHome';
 import { AntDesign, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+import { useDispatch, useSelector} from 'react-redux';
+import { deleteIncomeItem } from '../features/income/incomeSlice';
 
-export default function HomeIngresos ({navigation}) {   
+export default function HomeIngresos ({navigation}) {
+    
+    const income = useSelector((state) => state.income);
+    const dispatch = useDispatch();   
         
     return(             
         <View style={styles.container}>            
             <View style={styles.piechartcontainer}>
-                <PieChartHome title="Ingresos"/>
+                <PieChartHome title="Ingresos" items={income}/>
                 <View style={styles.plusButtonContainer}>                    
                     <Pressable onPress={() => navigation.navigate("Ingresos")}>
                         <MaterialCommunityIcons name='plus-circle-multiple' size={45} color="green"/>
                     </Pressable>            
                 </View>
-            </View>                                   
+            </View>
+            <ScrollView style={styles.flatlistCard}>
+                <FlatList
+                    data={income.items}
+                    keyExtractor={item => item.id}
+                    renderItem={({item}) => (
+                        <View style={styles.card}>
+                            <View style={styles.textCard}>
+                                <Text style={styles.text}>
+                                    {item.category}                                
+                                </Text>
+                                <Text style={styles.text}>
+                                    $ {item.price}                          
+                                </Text>
+                            </View>
+                            <View>
+                                <Pressable onPress={() => dispatch(deleteIncomeItem(item.id))}>                                                           
+                                    <FontAwesome name='trash' size={30}/>
+                                </Pressable>
+                            </View>
+                        </View>                        
+                    )}
+                />      
+            </ScrollView>                                            
         </View>        
     )                     
 }
@@ -22,8 +51,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,          
         minWidth:"100%",
-        backgroundColor:"#F0F4EF",         
-        borderWidth:2,                     
+        backgroundColor:"#F0F4EF",                           
     },     
     piechartcontainer:{
         paddingHorizontal:"10%",
@@ -41,5 +69,26 @@ const styles = StyleSheet.create({
         marginLeft:"70%",
         marginBottom:"2%",
         marginRight:"8%",
+    },
+    flatlistCard: {
+        marginBottom:"26%",        
+        paddingVertical:10 ,
+    },
+    card: {
+        borderWidth:1,        
+        backgroundColor: "gray",
+        borderRadius:20,
+        alignItems:"center",        
+        paddingVertical:5,
+        marginBottom:20,
+        marginHorizontal:"10%",
+
+    },    
+    textCard: {
+        alignItems:'center'
+    },
+    text: {
+        color:"#b4cded",
+        fontSize: 15,
     }
   });

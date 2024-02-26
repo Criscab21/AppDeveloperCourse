@@ -1,9 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { TextInput, View, Button, Text, ScrollView, FlatList, StyleSheet, Pressable } from 'react-native'
 import PieChart from 'react-native-pie-chart';
+import { useSelector } from 'react-redux';
 
 
-export default function PieChartHome ({title}) {
+export default function PieChartHome ({title, items}) {
+
+    items = useSelector((state)=> state.items)
 
     const widthAndHeight = 200; 
     const sliceColor = ['red', 'blue', 'yellow', 'green'];
@@ -13,7 +16,6 @@ export default function PieChartHome ({title}) {
         alimentos = 38,
         cafe = 5
     ])
-
 
     return(
         <View style={styles.container}>

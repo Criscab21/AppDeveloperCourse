@@ -1,30 +1,65 @@
-import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
+import { TextInput, View, Button, Text, ScrollView, FlatList, StyleSheet, Pressable } from 'react-native'
 import PieChartHome from './PieChartHome';
 import { AntDesign, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux'
+import { FontAwesome } from '@expo/vector-icons';
+import { deleteSpendItem } from '../features/spend/spendSlice'
 
-export default function Home ({navigation}) {    
-        
+export default function Home ({navigation}) {     
+
+    const spents = useSelector((state)=> state.spends);
+    const dispatch = useDispatch();        
+
     return(             
         <View style={styles.container}>            
             <View style={styles.piechartcontainer}>
-                <PieChartHome title="Gastos"/>
+                <PieChartHome title="Gastos" items={spents}/>
                 <View style={styles.plusButtonContainer}>                    
                     <Pressable onPress={() => navigation.navigate("Gastos")}>
                         <MaterialCommunityIcons name='plus-circle-multiple' size={45} color="green"/>
-                    </Pressable>            
-                </View>
-            </View>                                   
+                    </Pressable>    
+                </View>                    
+            </View>            
+            <ScrollView style={styles.flatlistCard}>
+                <FlatList
+                    data={spents.items}
+                    keyExtractor={item => item.id}
+                    renderItem={({item}) => (
+                        <View style={styles.card}>
+                            <View style={styles.textCard}>
+                                <Text style={styles.text}>
+                                    Titulo: {item.title}                                
+                                </Text>
+                                <Text style={styles.text}>
+                                    Categoria: {item.category}                                
+                                </Text>
+                                <Text style={styles.text}>
+                                    $ {item.price}                                
+                                </Text>
+                            </View>
+                            <View>
+                                <Pressable onPress={() => dispatch(deleteSpendItem(item.id)) }>                                                           
+                                    <FontAwesome name='trash' size={30}/>
+                                </Pressable>
+                            </View>
+                        </View>
+                    )}
+                />      
+            </ScrollView>         
         </View>        
     )                     
 }
 
 const styles = StyleSheet.create({
-    container: {
+    container: {        
         flex: 1,          
         minWidth:"100%",
-        backgroundColor:"#F0F4EF",         
-        borderWidth:2,                     
+        backgroundColor:"#F0F4EF",                             
     },     
+    flatlistCard: {
+        marginBottom:"26%",        
+        paddingVertical:10 ,
+    },
     piechartcontainer:{
         paddingHorizontal:"10%",
         marginHorizontal:"10%",        
@@ -41,5 +76,22 @@ const styles = StyleSheet.create({
         marginLeft:"70%",
         marginBottom:"2%",
         marginRight:"8%",
+    },
+    card: {
+        borderWidth:1,        
+        backgroundColor: "gray",
+        borderRadius:20,
+        alignItems:"center",        
+        paddingVertical:5,
+        marginBottom:20,
+        marginHorizontal:"10%",
+
+    },    
+    textCard: {
+        alignItems:'center'
+    },
+    text: {
+        color:"#b4cded",
+        fontSize: 15,
     }
   });

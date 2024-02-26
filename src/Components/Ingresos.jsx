@@ -2,45 +2,28 @@ import { useState } from 'react'
 import { TextInput, View, Button, Text, ScrollView, FlatList, StyleSheet, Pressable } from 'react-native'
 import uuid from 'react-native-uuid';
 import categories from '../utils/data/categories.json';
+import { useDispatch } from 'react-redux';
+import { addIncomeItem } from '../features/income/incomeSlice';
 
 
-export default function Ingresos () {
-    const [newSpent, setNewSpent] = useState({        
+export default function Ingresos ({navigation}) {
+
+    const dispatch = useDispatch();
+
+    const [newIncome, setNewIncome] = useState({        
         price: "",        
         category: "",
         id: ""
-    })
-
-    const [spents, setSpent] = useState([])
-    
-    const checkCategory = (c) => {
-        if(c === categories) {
-            
-        }
-    }
-
-    const addSpent = () => {        
-        setSpent([...spents, newSpent])
-        setNewSpent({            
-            price: "",            
-            category: "",
-            id: ""
-        })          
-    }
+    })          
 
     const onHandlerPrice = (p) => {
         const id = uuid.v4();
-        setNewSpent({...newSpent, price:p, id:id});
+        setNewIncome({...newIncome, price:p, id:id});
     }
 
     const onHandlerCategory = (c) => {
-        setNewSpent({...newSpent, category:c})        
+        setNewIncome({...newIncome, category:c})        
         
-    }
-
-    const deleteItem = (id) => {
-        setSpent(spents.filter(spent => spent.id != id));
-        console.log(`El gasto ${id} ha sido eliminado`);
     }
 
     return (
@@ -49,39 +32,23 @@ export default function Ingresos () {
             <View style={styles.inputCard}>                     
                 <TextInput 
                     style={styles.input} 
-                    value={newSpent.price} 
+                    value={newIncome.price} 
                     onChangeText={onHandlerPrice} 
                     placeholder='ARS' 
                     placeholderTextColor={"#0a210f"}
                 />            
                 <TextInput 
                     style={styles.input} 
-                    value={newSpent.category} 
+                    value={newIncome.category} 
                     onChangeText={onHandlerCategory} 
                     placeholder='Ingrese la categoria' 
                     placeholderTextColor={"#0a210f"}
                 />            
-                <Button title='Añadir Ingreso' onPress={addSpent}/>
-            </View>
-            <ScrollView style={styles.flatlistCard}>
-                <FlatList
-                    data={spents}
-                    keyExtractor={item => item.id}
-                    renderItem={({item}) => (
-                        <View style={styles.card}>                            
-                            <Text style={styles.textCard}>
-                                Categoria: {item.category}                                
-                            </Text>
-                            <Text style={styles.textCard}>
-                                {item.price} $                         
-                            </Text>
-                            <Pressable>                                                           
-                                <Button title='DEL' onPress={() => deleteItem(item.id)}/>
-                            </Pressable>
-                        </View>
-                    )}
-                />      
-            </ScrollView>            
+                <Button title='Añadir Ingreso' onPress={() => {
+                    dispatch(addIncomeItem(newIncome));
+                    navigation.goBack();
+                    }}/>
+            </View>               
         </View>
         
     )
@@ -92,8 +59,7 @@ const styles = StyleSheet.create({
     container: {        
         flex: 1,          
         minWidth:"100%",
-        backgroundColor:"#F0F4EF",         
-        borderWidth:2,                        
+        backgroundColor:"#F0F4EF",                             
     },     
     inputCard: {
         width: "100%",
@@ -108,24 +74,5 @@ const styles = StyleSheet.create({
         paddingVertical:5,
         paddingHorizontal:10,
     },
-    flatlistCard: {
-        marginBottom:"10%",        
-        paddingVertical:10 ,
-    },
-    card: {
-        borderWidth:1,        
-        backgroundColor: "gray",
-        borderRadius:20,
-        alignItems:"center",        
-        paddingVertical:5,
-        marginBottom:20,
-
-    },
-    buttonCard: {
-        marginVertical: 2,        
-    },  
-    textCard: {
-        color:"#b4cded",
-        fontSize: 15,
-    },
+     
 })

@@ -32,10 +32,10 @@ export const Header = ({navigation}) => {
 
 
 const styles = StyleSheet.create({
-    headercontainer: {          
+    headercontainer: {
         minWidth:"100%",
-        backgroundColor:"#F0F4EF",         
-        borderWidth:3,                     
+        backgroundColor:"#F0F4EF",
+        paddingBottom:10,                           
     },     
     titleContainer: {        
         flexDirection:"row", 

@@ -2,11 +2,14 @@ import { useState } from 'react'
 import { TextInput, View, Button, Text, ScrollView, FlatList, StyleSheet, Pressable } from 'react-native'
 import uuid from 'react-native-uuid';
 import categories from '../utils/data/categories.json';
-import { FontAwesome } from '@expo/vector-icons'
+import { useDispatch, useSelector } from 'react-redux';
+import { addSpendItem } from '../features/spend/spendSlice'
 
 
-export default function Gastos () {          
-        
+export default function Gastos ({navigation}) {    
+
+    const dispatch = useDispatch();
+
     const [newSpent, setNewSpent] = useState({
         title: "",
         price: "",
@@ -14,26 +17,7 @@ export default function Gastos () {
         category: "",
         id: ""
     })
-
-    const [spents, setSpent] = useState([])
     
-    const checkCategory = (c) => {
-        if(c === categories) {
-            
-        }
-    }
-
-    const addSpent = () => {        
-        setSpent([...spents, newSpent])
-        setNewSpent({
-            title: "",
-            price: "",
-            paymentMethod: "",
-            category: "",
-            id: ""
-        })          
-    }
-
     const onHandlerTitle = (t) => {
         const id = uuid.v4();
         setNewSpent({...newSpent, title:t, id:id});
@@ -48,17 +32,10 @@ export default function Gastos () {
     }
 
     const onHandlerCategory = (c) => {
-        setNewSpent({...newSpent, category:c})        
-        
-    }
+        setNewSpent({...newSpent, category:c})                
+    }   
 
-    const deleteItem = (id) => {
-        setSpent(spents.filter(spent => spent.id != id));
-        console.log(`El gasto ${id} ha sido eliminado`);
-    }
-
-    return (
-        
+    return (        
         <View style={styles.container}>                                                
             <View style={styles.inputCard}>
                 <TextInput 
@@ -82,34 +59,11 @@ export default function Gastos () {
                     placeholder='Ingrese la categoria' 
                     placeholderTextColor={"#0a210f"}
                 />            
-                <Button title='Añadir transaccion' onPress={addSpent}/>
-            </View>
-            <ScrollView style={styles.flatlistCard}>
-                <FlatList
-                    data={spents}
-                    keyExtractor={item => item.id}
-                    renderItem={({item}) => (
-                        <View style={styles.card}>
-                            <View style={styles.textcard}>
-                                <Text style={styles.text}>
-                                    Titulo: {item.title}                                
-                                </Text>
-                                <Text style={styles.text}>
-                                    Categoria: {item.category}                                
-                                </Text>
-                                <Text style={styles.text}>
-                                    Precio: $ {item.price}                                
-                                </Text>
-                            </View>
-                            <View>
-                                <Pressable onPress={() => deleteItem(item.id)}>                                                           
-                                    <FontAwesome name='trash' size={30}/>
-                                </Pressable>
-                            </View>
-                        </View>
-                    )}
-                />      
-            </ScrollView>            
+                <Button title='Añadir transaccion' onPress={() => {
+                    dispatch(addSpendItem(newSpent));
+                    navigation.goBack();
+                }}/>
+            </View>                                 
         </View>
         
     )
@@ -119,8 +73,7 @@ const styles = StyleSheet.create({
     container: {        
         flex: 1,          
         minWidth:"100%",
-        backgroundColor:"#F0F4EF",         
-        borderWidth:2,                        
+        backgroundColor:"#F0F4EF",                           
     },     
     inputCard: {
         width: "100%",
@@ -134,25 +87,5 @@ const styles = StyleSheet.create({
         marginVertical:5,
         paddingVertical:5,
         paddingHorizontal:10,
-    },
-    flatlistCard: {
-        marginBottom:"26%",        
-        paddingVertical:10 ,
-    },
-    card: {
-        borderWidth:1,        
-        backgroundColor: "gray",
-        borderRadius:20,
-        alignItems:"center",        
-        paddingVertical:5,
-        marginBottom:20,
-
     },    
-    textCard: {
-        alignItems:'center'
-    },
-    text: {
-        color:"#b4cded",
-        fontSize: 15,
-    }
 })
