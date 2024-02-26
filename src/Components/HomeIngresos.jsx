@@ -13,7 +13,7 @@ export default function HomeIngresos ({navigation}) {
     return(             
         <View style={styles.container}>            
             <View style={styles.piechartcontainer}>
-                <PieChartHome title="Ingresos" items={income}/>
+                <PieChartHome title="Ingresos" items={income.total} color="green"/>
                 <View style={styles.plusButtonContainer}>                    
                     <Pressable onPress={() => navigation.navigate("Ingresos")}>
                         <MaterialCommunityIcons name='plus-circle-multiple' size={45} color="green"/>

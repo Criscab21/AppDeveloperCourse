@@ -10,13 +10,15 @@ export const spendSlice = createSlice ({
     initialState,
     reducers: {
         addSpendItem: (state, actions) => {
-            state.items = [...state.items, actions.payload]            
+            state.items = [...state.items, actions.payload]
+            state.total += Number(actions.payload.price);        
         },
         deleteSpendItem: (state, actions) => {
-            state.items = state.items.filter((item)=> item.id !== actions.payload);
-        }
+            state.total -= Number(actions.payload.price);
+            state.items = state.items.filter((item)=> item.id !== actions.payload.id);
+        },        
     }
 })
 
-export const { addSpendItem, deleteSpendItem } = spendSlice.actions
+export const { addSpendItem, deleteSpendItem, calTotal } = spendSlice.actions
 export default spendSlice.reducer

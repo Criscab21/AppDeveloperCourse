@@ -4,6 +4,7 @@ import uuid from 'react-native-uuid';
 import categories from '../utils/data/categories.json';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSpendItem } from '../features/spend/spendSlice'
+import { ValidationTextInput } from './ValidationTextInput';
 
 
 export default function Gastos ({navigation}) {    
@@ -39,26 +40,23 @@ export default function Gastos ({navigation}) {
         <View style={styles.container}>                                                
             <View style={styles.inputCard}>
                 <TextInput 
-                    style={styles.input} 
+                    style={styles.input}                    
                     value={newSpent.title} 
                     onChangeText={onHandlerTitle} 
                     placeholder='Ingrese el gasto' 
                     placeholderTextColor={"#0a210f"}
                 />            
-                <TextInput 
-                    style={styles.input} 
-                    value={newSpent.price} 
-                    onChangeText={onHandlerPrice} 
-                    placeholder='Ingrese el monto' 
-                    placeholderTextColor={"#0a210f"}
-                />            
+                <ValidationTextInput                    
+                    regex={/^\d{3}-\d{3-\d{4}$/}  
+                    onHandlerPrice={onHandlerPrice}                                   
+                />                                
                 <TextInput 
                     style={styles.input} 
                     value={newSpent.category} 
                     onChangeText={onHandlerCategory} 
                     placeholder='Ingrese la categoria' 
                     placeholderTextColor={"#0a210f"}
-                />            
+                />
                 <Button title='Añadir transaccion' onPress={() => {
                     dispatch(addSpendItem(newSpent));
                     navigation.goBack();

@@ -13,7 +13,7 @@ export default function Home ({navigation}) {
     return(             
         <View style={styles.container}>            
             <View style={styles.piechartcontainer}>
-                <PieChartHome title="Gastos" items={spents}/>
+                <PieChartHome title="Gastos" items={spents.total} color="red"/>                
                 <View style={styles.plusButtonContainer}>                    
                     <Pressable onPress={() => navigation.navigate("Gastos")}>
                         <MaterialCommunityIcons name='plus-circle-multiple' size={45} color="green"/>
@@ -38,7 +38,7 @@ export default function Home ({navigation}) {
                                 </Text>
                             </View>
                             <View>
-                                <Pressable onPress={() => dispatch(deleteSpendItem(item.id)) }>                                                           
+                                <Pressable onPress={() => dispatch(deleteSpendItem(item)) }>                                                           
                                     <FontAwesome name='trash' size={30}/>
                                 </Pressable>
                             </View>

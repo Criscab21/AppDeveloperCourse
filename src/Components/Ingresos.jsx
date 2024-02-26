@@ -4,6 +4,7 @@ import uuid from 'react-native-uuid';
 import categories from '../utils/data/categories.json';
 import { useDispatch } from 'react-redux';
 import { addIncomeItem } from '../features/income/incomeSlice';
+import { ValidationTextInput } from './ValidationTextInput';
 
 
 export default function Ingresos ({navigation}) {
@@ -30,13 +31,10 @@ export default function Ingresos ({navigation}) {
         
         <View style={styles.container}>                                                
             <View style={styles.inputCard}>                     
-                <TextInput 
-                    style={styles.input} 
-                    value={newIncome.price} 
-                    onChangeText={onHandlerPrice} 
-                    placeholder='ARS' 
-                    placeholderTextColor={"#0a210f"}
-                />            
+                <ValidationTextInput                    
+                    regex={/^\d{3}-\d{3-\d{4}$/}  
+                    onHandlerPrice={onHandlerPrice}                                   
+                />        
                 <TextInput 
                     style={styles.input} 
                     value={newIncome.category} 

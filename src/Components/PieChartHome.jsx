@@ -4,10 +4,8 @@ import PieChart from 'react-native-pie-chart';
 import { useSelector } from 'react-redux';
 
 
-export default function PieChartHome ({title, items}) {
-
-    items = useSelector((state)=> state.items)
-
+export default function PieChartHome ({title, color, items}) {
+    
     const widthAndHeight = 200; 
     const sliceColor = ['red', 'blue', 'yellow', 'green'];
     const [categoryCount, setCategoryCount] = useState([
@@ -15,24 +13,50 @@ export default function PieChartHome ({title, items}) {
         generales = 15,
         alimentos = 38,
         cafe = 5
-    ])
+    ]);
+    
 
-    return(
-        <View style={styles.container}>
-            <Text style={styles.titleContainer}>
-                {title}
-            </Text>
-            <View style={styles.chart}>
-                <PieChart
-                    widthAndHeight={widthAndHeight}
-                    series={categoryCount}
-                    sliceColor={sliceColor}
-                    coverRadius={0.60}
-                    coverFill={'gray'}
-                />
+    if(color === "red") {
+        return(
+            <View style={styles.container}>
+                <Text style={styles.titleContainer}>
+                    {title}
+                </Text>            
+                <Text style={styles.numberSpends}>
+                    $ {items}
+                </Text>            
+                <View style={styles.chart}>
+                    <PieChart
+                        widthAndHeight={widthAndHeight}
+                        series={categoryCount}
+                        sliceColor={sliceColor}
+                        coverRadius={0.60}
+                        coverFill={'gray'}
+                    />
+                </View>
             </View>
-        </View>
-    )
+        )
+    } else {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.titleContainer}>
+                    {title}
+                </Text>            
+                <Text style={styles.numberIncome}>
+                    $ {items}
+                </Text>            
+                <View style={styles.chart}>
+                    <PieChart
+                        widthAndHeight={widthAndHeight}
+                        series={categoryCount}
+                        sliceColor={sliceColor}
+                        coverRadius={0.60}
+                        coverFill={'gray'}
+                    />
+                </View>
+            </View>
+        )
+    }      
            
 }
 
@@ -48,6 +72,16 @@ const styles = StyleSheet.create({
     chart: {
         alignItems:"center",
         paddingTop:20
-    }   
+    },
+    numberSpends:{
+        textAlign:"center",
+        fontSize:25,
+        color:"red",
+    },
+    numberIncome: {
+        textAlign:"center",
+        fontSize:25,
+        color:"green"
+    }
 
 })
