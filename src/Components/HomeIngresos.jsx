@@ -35,7 +35,7 @@ export default function HomeIngresos ({navigation}) {
                                 </Text>
                             </View>
                             <View>
-                                <Pressable onPress={() => dispatch(deleteIncomeItem(item.id))}>                                                           
+                                <Pressable onPress={() => dispatch(deleteIncomeItem(item))}>                                                           
                                     <FontAwesome name='trash' size={30}/>
                                 </Pressable>
                             </View>

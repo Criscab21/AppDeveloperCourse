@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     numberIncome: {
         textAlign:"center",
         fontSize:25,
-        color:"green"
+        color:"gold"
     }
 
 })

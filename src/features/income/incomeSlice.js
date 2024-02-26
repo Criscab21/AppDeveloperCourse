@@ -15,7 +15,7 @@ export const incomeSlice = createSlice ({
         },
         deleteIncomeItem: (state, actions) => {
             state.total -= Number(actions.payload.price);
-            state.items = state.items.filter((item)=> item.id !== actions.payload);
+            state.items = state.items.filter((item)=> item.id !== actions.payload.id);
         }
     }
 })
