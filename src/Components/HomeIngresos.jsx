@@ -4,6 +4,7 @@ import { AntDesign, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector} from 'react-redux';
 import { deleteIncomeItem } from '../features/income/incomeSlice';
+import { subsCategories } from '../features/incomeCategories/incomeCategoriesSlice';
 
 export default function HomeIngresos ({navigation}) {
     
@@ -13,18 +14,16 @@ export default function HomeIngresos ({navigation}) {
     return(             
         <View style={styles.container}>            
             <View style={styles.piechartcontainer}>
-                <PieChartHome title="Ingresos" items={income.total} color="green"/>
+                <PieChartHome title="Ingresos" color="green"/>
                 <View style={styles.plusButtonContainer}>                    
                     <Pressable onPress={() => navigation.navigate("Ingresos")}>
                         <MaterialCommunityIcons name='plus-circle-multiple' size={45} color="green"/>
                     </Pressable>            
                 </View>
             </View>
-            <ScrollView style={styles.flatlistCard}>
-                <FlatList
-                    data={income.items}
-                    keyExtractor={item => item.id}
-                    renderItem={({item}) => (
+            <ScrollView style={styles.flatlistCard}>                
+                {income.items.map((item) => {
+                    return (
                         <View style={styles.card}>
                             <View style={styles.textCard}>
                                 <Text style={styles.text}>
@@ -35,13 +34,16 @@ export default function HomeIngresos ({navigation}) {
                                 </Text>
                             </View>
                             <View>
-                                <Pressable onPress={() => dispatch(deleteIncomeItem(item))}>                                                           
+                                <Pressable onPress={() => {
+                                        dispatch(deleteIncomeItem(item))
+                                        dispatch(subsCategories(item))
+                                        }}>              
                                     <FontAwesome name='trash' size={30}/>
                                 </Pressable>
                             </View>
-                        </View>                        
-                    )}
-                />      
+                        </View> 
+                    )
+                })} 
             </ScrollView>                                            
         </View>        
     )                     

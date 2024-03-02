@@ -1,4 +1,4 @@
-import {MainNavigator} from './src/navigation/MainNavigator';
+import { MainNavigator } from './src/navigation/MainNavigator';
 import { StatusBar } from 'expo-status-bar';
 import { store } from './src/app/store';
 import { Provider } from 'react-redux';

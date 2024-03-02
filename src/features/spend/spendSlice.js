@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = { 
     items: [], 
-    total:0
+    value:0
 }
 
 export const spendSlice = createSlice ({
@@ -11,14 +11,14 @@ export const spendSlice = createSlice ({
     reducers: {
         addSpendItem: (state, actions) => {
             state.items = [...state.items, actions.payload]
-            state.total += Number(actions.payload.price);        
+            state.value += Number(actions.payload.price);        
         },
-        deleteSpendItem: (state, actions) => {
-            state.total -= Number(actions.payload.price);
+        deleteSpendItem: (state, actions) => {            
+            state.value -= Number(actions.payload.price);
             state.items = state.items.filter((item)=> item.id !== actions.payload.id);
         },        
     }
 })
 
-export const { addSpendItem, deleteSpendItem, calTotal } = spendSlice.actions
+export const { addSpendItem, deleteSpendItem } = spendSlice.actions
 export default spendSlice.reducer

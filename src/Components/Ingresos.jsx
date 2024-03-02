@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { TextInput, View, Button, Text, ScrollView, FlatList, StyleSheet, Pressable } from 'react-native'
 import uuid from 'react-native-uuid';
-import categories from '../utils/data/categories.json';
 import { useDispatch } from 'react-redux';
 import { addIncomeItem } from '../features/income/incomeSlice';
 import { ValidationTextInput } from './ValidationTextInput';
+import IncomeCategories from './IncomeCategories';
+import { plusCategories } from '../features/incomeCategories/incomeCategoriesSlice';
+
 
 
 export default function Ingresos ({navigation}) {
@@ -35,15 +37,10 @@ export default function Ingresos ({navigation}) {
                     regex={/^\d{3}-\d{3-\d{4}$/}  
                     onHandlerPrice={onHandlerPrice}                                   
                 />        
-                <TextInput 
-                    style={styles.input} 
-                    value={newIncome.category} 
-                    onChangeText={onHandlerCategory} 
-                    placeholder='Ingrese la categoria' 
-                    placeholderTextColor={"#0a210f"}
-                />            
+                <IncomeCategories selectCategory={onHandlerCategory}/>      
                 <Button title='Añadir Ingreso' onPress={() => {
                     dispatch(addIncomeItem(newIncome));
+                    dispatch(plusCategories(newIncome));                    
                     navigation.goBack();
                     }}/>
             </View>               

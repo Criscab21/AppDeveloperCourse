@@ -1,21 +1,16 @@
-import { useEffect, useState } from 'react'
-import { TextInput, View, Button, Text, ScrollView, FlatList, StyleSheet, Pressable } from 'react-native'
-import PieChart from 'react-native-pie-chart';
+import { TextInput, View, Button, Text, ScrollView, FlatList, StyleSheet, Pressable } from 'react-native';
 import { useSelector } from 'react-redux';
+import { PieChart } from "react-native-gifted-charts";
 
 
-export default function PieChartHome ({title, color, items}) {
+export default function PieChartHome ({title, color}) {
     
-    const widthAndHeight = 200; 
-    const sliceColor = ['red', 'blue', 'yellow', 'green'];
-    const [categoryCount, setCategoryCount] = useState([
-        salud = 10,
-        generales = 15,
-        alimentos = 38,
-        cafe = 5
-    ]);
+    const totalIncome = useSelector((state) => state.income)
+    const totalSpends = useSelector((state) => state.spends);
+    const category = useSelector((state) => state.categories);    
+    const incomeCategory = useSelector((state) => state.incomeCategories)    
     
-
+    
     if(color === "red") {
         return(
             <View style={styles.container}>
@@ -23,16 +18,21 @@ export default function PieChartHome ({title, color, items}) {
                     {title}
                 </Text>            
                 <Text style={styles.numberSpends}>
-                    $ {items}
+                    $ {totalSpends.value}
                 </Text>            
                 <View style={styles.chart}>
-                    <PieChart
-                        widthAndHeight={widthAndHeight}
-                        series={categoryCount}
-                        sliceColor={sliceColor}
-                        coverRadius={0.60}
-                        coverFill={'gray'}
-                    />
+                    <PieChart       
+                        strokeColor="white"        
+                        strokeWidth={4}
+                        donut      
+                        innerCircleColor="#414141"
+                        innerCircleBorderWidth={4}
+                        showValuesAsLabels={true}
+                        showText
+                        textSize={18}                       
+                        innerCircleBorderColor={'white'}    
+                        radius={100}                                
+                        data = { category.categories } />
                 </View>
             </View>
         )
@@ -43,20 +43,26 @@ export default function PieChartHome ({title, color, items}) {
                     {title}
                 </Text>            
                 <Text style={styles.numberIncome}>
-                    $ {items}
+                    $ {totalIncome.total}
                 </Text>            
                 <View style={styles.chart}>
-                    <PieChart
-                        widthAndHeight={widthAndHeight}
-                        series={categoryCount}
-                        sliceColor={sliceColor}
-                        coverRadius={0.60}
-                        coverFill={'gray'}
-                    />
+                    <PieChart       
+                        strokeColor="white"        
+                        strokeWidth={4}
+                        donut      
+                        innerCircleColor="#414141"
+                        innerCircleBorderWidth={4}
+                        showValuesAsLabels={true}
+                        showText
+                        textSize={18}                       
+                        innerCircleBorderColor={'white'}    
+                        radius={100}                                
+                        data = { incomeCategory.incomeCategories } />
                 </View>
             </View>
         )
-    }      
+
+    }   
            
 }
 

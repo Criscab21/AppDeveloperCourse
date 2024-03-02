@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { TextInput, View, Button, Text, ScrollView, FlatList, StyleSheet, Pressable } from 'react-native'
 import uuid from 'react-native-uuid';
-import categories from '../utils/data/categories.json';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSpendItem } from '../features/spend/spendSlice'
 import { ValidationTextInput } from './ValidationTextInput';
+import Categories from './Categories';
+import { plusCategories } from '../features/categories/categoriesSlice';
 
 
 export default function Gastos ({navigation}) {    
@@ -12,7 +13,7 @@ export default function Gastos ({navigation}) {
     const dispatch = useDispatch();
 
     const [newSpent, setNewSpent] = useState({
-        title: "",
+        name: "",
         price: "",
         paymentMethod: "",
         category: "",
@@ -21,7 +22,7 @@ export default function Gastos ({navigation}) {
     
     const onHandlerTitle = (t) => {
         const id = uuid.v4();
-        setNewSpent({...newSpent, title:t, id:id});
+        setNewSpent({...newSpent, name:t, id:id});
     }
 
     const onHandlerPrice = (p) => {
@@ -41,7 +42,7 @@ export default function Gastos ({navigation}) {
             <View style={styles.inputCard}>
                 <TextInput 
                     style={styles.input}                    
-                    value={newSpent.title} 
+                    value={newSpent.name} 
                     onChangeText={onHandlerTitle} 
                     placeholder='Ingrese el gasto' 
                     placeholderTextColor={"#0a210f"}
@@ -49,16 +50,11 @@ export default function Gastos ({navigation}) {
                 <ValidationTextInput                    
                     regex={/^\d{3}-\d{3-\d{4}$/}  
                     onHandlerPrice={onHandlerPrice}                                   
-                />                                
-                <TextInput 
-                    style={styles.input} 
-                    value={newSpent.category} 
-                    onChangeText={onHandlerCategory} 
-                    placeholder='Ingrese la categoria' 
-                    placeholderTextColor={"#0a210f"}
-                />
+                />                         
+                <Categories selectCategory = {onHandlerCategory}/>                
                 <Button title='Añadir transaccion' onPress={() => {
-                    dispatch(addSpendItem(newSpent));
+                    dispatch(addSpendItem(newSpent)); 
+                    dispatch(plusCategories(newSpent));              
                     navigation.goBack();
                 }}/>
             </View>                                 

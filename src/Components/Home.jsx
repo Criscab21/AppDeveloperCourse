@@ -1,9 +1,11 @@
-import { TextInput, View, Button, Text, ScrollView, FlatList, StyleSheet, Pressable } from 'react-native'
+import { TextInput, View, Button, Text, ScrollView, StyleSheet, Pressable } from 'react-native'
 import PieChartHome from './PieChartHome';
-import { AntDesign, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesome } from '@expo/vector-icons';
 import { deleteSpendItem } from '../features/spend/spendSlice'
+import { subsCategories } from '../features/categories/categoriesSlice';
+
 
 export default function Home ({navigation}) {     
 
@@ -13,22 +15,20 @@ export default function Home ({navigation}) {
     return(             
         <View style={styles.container}>            
             <View style={styles.piechartcontainer}>
-                <PieChartHome title="Gastos" items={spents.total} color="red"/>                
+                <PieChartHome title="Gastos" color="red"/>                
                 <View style={styles.plusButtonContainer}>                    
                     <Pressable onPress={() => navigation.navigate("Gastos")}>
                         <MaterialCommunityIcons name='plus-circle-multiple' size={45} color="green"/>
                     </Pressable>    
                 </View>                    
             </View>            
-            <ScrollView style={styles.flatlistCard}>
-                <FlatList
-                    data={spents.items}
-                    keyExtractor={item => item.id}
-                    renderItem={({item}) => (
+            <ScrollView style={styles.scrollView}>
+                {spents.items.map((item) => {  
+                    return (
                         <View style={styles.card}>
                             <View style={styles.textCard}>
                                 <Text style={styles.text}>
-                                    Titulo: {item.title}                                
+                                    Titulo: {item.name}                                
                                 </Text>
                                 <Text style={styles.text}>
                                     Categoria: {item.category}                                
@@ -38,14 +38,17 @@ export default function Home ({navigation}) {
                                 </Text>
                             </View>
                             <View>
-                                <Pressable onPress={() => dispatch(deleteSpendItem(item)) }>                                                           
+                                <Pressable onPress={() => {
+                                        dispatch(deleteSpendItem(item))
+                                        dispatch(subsCategories(item))
+                                        } }>
                                     <FontAwesome name='trash' size={30}/>
                                 </Pressable>
                             </View>
                         </View>
-                    )}
-                />      
-            </ScrollView>         
+                        )
+                })}                        
+            </ScrollView>            
         </View>        
     )                     
 }
@@ -56,7 +59,7 @@ const styles = StyleSheet.create({
         minWidth:"100%",
         backgroundColor:"#F0F4EF",                             
     },     
-    flatlistCard: {
+    scrollView: {
         marginBottom:"26%",        
         paddingVertical:10 ,
     },
