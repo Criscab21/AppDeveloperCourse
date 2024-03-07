@@ -1,5 +1,5 @@
 import Home from '../Components/Home';
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Gastos from '../Components/Gastos';
 import { Header } from '../Components/Header';
 

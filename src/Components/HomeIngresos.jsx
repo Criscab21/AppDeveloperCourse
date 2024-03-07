@@ -1,6 +1,6 @@
-import { TextInput, View, Button, Text, ScrollView, FlatList, StyleSheet, Pressable } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, Pressable } from 'react-native'
 import PieChartHome from './PieChartHome';
-import { AntDesign, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { useDispatch, useSelector} from 'react-redux';
 import { deleteIncomeItem } from '../features/income/incomeSlice';
@@ -24,7 +24,7 @@ export default function HomeIngresos ({navigation}) {
             <ScrollView style={styles.flatlistCard}>                
                 {income.items.map((item) => {
                     return (
-                        <View style={styles.card}>
+                        <View key={item.name} style={styles.card}>
                             <View style={styles.textCard}>
                                 <Text style={styles.text}>
                                     {item.category}                                

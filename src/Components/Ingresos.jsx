@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { TextInput, View, Button, Text, ScrollView, FlatList, StyleSheet, Pressable } from 'react-native'
+import { View, Text, StyleSheet, Pressable } from 'react-native'
 import uuid from 'react-native-uuid';
 import { useDispatch } from 'react-redux';
 import { addIncomeItem } from '../features/income/incomeSlice';
@@ -37,12 +37,17 @@ export default function Ingresos ({navigation}) {
                     regex={/^\d{3}-\d{3-\d{4}$/}  
                     onHandlerPrice={onHandlerPrice}                                   
                 />        
-                <IncomeCategories selectCategory={onHandlerCategory}/>      
-                <Button title='Añadir Ingreso' onPress={() => {
-                    dispatch(addIncomeItem(newIncome));
-                    dispatch(plusCategories(newIncome));                    
+                <IncomeCategories selectCategory={onHandlerCategory}/>  
+                <Pressable onPress={() =>{
+                    dispatch(addIncomeItem(newIncome)); 
+                    dispatch(plusCategories(newIncome));             
                     navigation.goBack();
-                    }}/>
+                    }}>
+                    <View style={styles.button}>
+                        <Text style={styles.text}>Añadir ingreso</Text>               
+                    </View>
+                </Pressable>      
+
             </View>               
         </View>
         
@@ -69,5 +74,18 @@ const styles = StyleSheet.create({
         paddingVertical:5,
         paddingHorizontal:10,
     },
-     
+    button:{
+        textAlign:"center",
+        backgroundColor:"gold",
+        height:30,
+        position:'absolute',
+        borderRadius:15,        
+        left:100,
+        right:100,            
+    },
+    text: {
+        textAlign:"center",
+        color:"black",
+        fontSize: 15,   
+    }, 
 })

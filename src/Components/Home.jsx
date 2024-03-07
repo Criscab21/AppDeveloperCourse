@@ -1,6 +1,6 @@
-import { TextInput, View, Button, Text, ScrollView, StyleSheet, Pressable } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, Pressable } from 'react-native'
 import PieChartHome from './PieChartHome';
-import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesome } from '@expo/vector-icons';
 import { deleteSpendItem } from '../features/spend/spendSlice'
@@ -25,10 +25,10 @@ export default function Home ({navigation}) {
             <ScrollView style={styles.scrollView}>
                 {spents.items.map((item) => {  
                     return (
-                        <View style={styles.card}>
+                        <View key={item.name} style={styles.card}>
                             <View style={styles.textCard}>
                                 <Text style={styles.text}>
-                                    Titulo: {item.name}                                
+                                    {item.name}                                
                                 </Text>
                                 <Text style={styles.text}>
                                     Categoria: {item.category}                                
@@ -39,8 +39,8 @@ export default function Home ({navigation}) {
                             </View>
                             <View>
                                 <Pressable onPress={() => {
-                                        dispatch(deleteSpendItem(item))
-                                        dispatch(subsCategories(item))
+                                        dispatch(deleteSpendItem(item));
+                                        dispatch(subsCategories(item));
                                         } }>
                                     <FontAwesome name='trash' size={30}/>
                                 </Pressable>

@@ -4,19 +4,27 @@ const initialState = {
     incomeCategories: [
         {
             name: "Sueldo",
-            value: 0,            
+            value: 0,
+            iconName: "hail",
+            color: "gold"
         },
         {
             name: "Venta",
-            value: 0,            
+            value: 0,   
+            iconName: "home-analytics",
+            color: "red"         
         },
         {
             name: "Regalo",
-            value: 0,            
+            value: 0, 
+            iconName: "gift",
+            color: "green"           
         },
         {
             name: "Prestamo",
-            value: 0,            
+            value: 0,  
+            iconName: "hand-extended",
+            color: "blue"          
         },
     ],     
 }
@@ -30,8 +38,7 @@ export const IncomeCategoriesSlice = createSlice({
         },
         plusCategories: (state, actions) => {            
             state.incomeCategories.find((item) => {
-                if(item.name === actions.payload.category) {
-                    console.log(item)
+                if(item.name === actions.payload.category) {                    
                     item.value += Number(actions.payload.price);
                     }
                 })

@@ -1,60 +1,19 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
-import GastosNavigator from './GastosNavigator';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import IngresosNavigator from './IngresosNavigator';
-import TabBarIcon from '../Components/TabBarIcon';
+import TabNavigator from './TabNavigator';
+import AuthStack from './AuthStack';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-const Tab = createBottomTabNavigator();
 
 export const MainNavigator = () => {
 
+  const user = useSelector((state) => state.auth);
+  
   return (
     <>
       { <NavigationContainer>
-        <Tab.Navigator
-          initialRouteName='Gastos'
-          screenOptions={{
-            headerShown:false,
-            tabBarStyle: Styles.tabbar,
-            tabBarShowLabel:false,           
-          }
-          }
-        >
-          <Tab.Screen 
-            name='Gastos' 
-            component={GastosNavigator}
-            options={{
-              tabBarIcon: ({focused}) => {
-                return <TabBarIcon title={'Gastos'} nameIcon={'level-down'} color={"red"} focused={focused}/>
-              }
-            }}
-            />
-          <Tab.Screen 
-            name='Ingresos'
-            component={IngresosNavigator}
-            options={{
-              tabBarIcon: ({focused}) => {
-                return <TabBarIcon title={'Ingresos'} nameIcon={'level-up'} color={"gold"} focused={focused}/>
-              }
-            }}
-            />
-        </Tab.Navigator>
+        {user.idToken ? <TabNavigator/> : <AuthStack/>}        
       </NavigationContainer> }
     </>
   )
 }
-
-const Styles = StyleSheet.create({
-  tabbar: {
-    backgroundColor:"#14591d",
-    height:80,
-    shadowColor:'silver',
-    elevation:4,
-    position:'absolute',
-    borderRadius:15,
-    bottom:25,
-    left:20,
-    right:20,        
-  }
-})

@@ -4,19 +4,45 @@ const initialState = {
     categories: [
         {
             name: "Salud",
-            value: 0,            
+            value: 0,
+            iconName: "ambulance",
+            color: "red"
         },
         {
             name: "Ocio",
-            value: 0,            
+            value: 0,     
+            iconName: "beer",
+            color: "green",
         },
         {
-            name: "Casa",
-            value: 0,            
+            name: "Nafta",
+            value: 0,     
+            iconName: "car",
+            color:"blue"       
         },
         {
-            name: "Cafe",
-            value: 0,            
+            name: "viaje",
+            value: 0,  
+            iconName: "airplane",
+            color:"pink"           
+        },
+        {
+            name: "Regalo",
+            value: 0,  
+            iconName: "gift",
+            color:"gold"           
+        },
+        {
+            name: "Comida",
+            value: 0,
+            iconName: "baguette",
+            color: "silver"
+        },
+        {
+            name: "Generales",
+            value: 0,
+            iconName: "cart",
+            color: "brown"
         },
     ],     
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { TextInput, View, Button, Text, ScrollView, FlatList, StyleSheet, Pressable } from 'react-native'
+import { TextInput, View, Text, StyleSheet, Pressable } from 'react-native'
 import uuid from 'react-native-uuid';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addSpendItem } from '../features/spend/spendSlice'
 import { ValidationTextInput } from './ValidationTextInput';
 import Categories from './Categories';
@@ -51,12 +51,16 @@ export default function Gastos ({navigation}) {
                     regex={/^\d{3}-\d{3-\d{4}$/}  
                     onHandlerPrice={onHandlerPrice}                                   
                 />                         
-                <Categories selectCategory = {onHandlerCategory}/>                
-                <Button title='Añadir transaccion' onPress={() => {
+                <Categories selectCategory = {onHandlerCategory}/>
+                <Pressable onPress={() =>{
                     dispatch(addSpendItem(newSpent)); 
                     dispatch(plusCategories(newSpent));              
                     navigation.goBack();
-                }}/>
+                    }}>
+                    <View style={styles.button}>
+                        <Text style={styles.text}>Añadir transaccion</Text>               
+                    </View>
+                </Pressable>                
             </View>                                 
         </View>
         
@@ -81,5 +85,19 @@ const styles = StyleSheet.create({
         marginVertical:5,
         paddingVertical:5,
         paddingHorizontal:10,
-    },    
+    },  
+    button:{
+        textAlign:"center",
+        backgroundColor:"gold",
+        height:30,
+        position:'absolute',
+        borderRadius:15,        
+        left:100,
+        right:100,            
+    },
+    text: {
+        textAlign:"center",
+        color:"black",
+        fontSize: 15,   
+    }, 
 })
