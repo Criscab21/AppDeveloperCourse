@@ -22,7 +22,7 @@ const Register = ({navigation}) => {
         try {
             registerSchema.validateSync({email, password, confirmPassword});
             const {data} = await triggerRegister({ email, password });         
-            dispatch(setUser({email:data.email, idToken:data.idToken}));  
+            dispatch(setUser({email:data.email, idToken:data.idToken, localId: data.localId}));  
             navigation.navigate("Login");                  
         } catch (error) {
             setErrorEmail("");

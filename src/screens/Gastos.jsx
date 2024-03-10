@@ -3,9 +3,9 @@ import { TextInput, View, Text, StyleSheet, Pressable } from 'react-native'
 import uuid from 'react-native-uuid';
 import { useDispatch } from 'react-redux';
 import { addSpendItem } from '../features/spend/spendSlice'
-import { ValidationTextInput } from './ValidationTextInput';
-import Categories from './Categories';
+import Categories from '../Components/Categories';
 import { plusCategories } from '../features/categories/categoriesSlice';
+import { ValidationTextInput } from '../Components/ValidationTextInput';
 
 
 export default function Gastos ({navigation}) {    

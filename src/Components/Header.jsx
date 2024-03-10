@@ -1,23 +1,23 @@
-import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { DrawerActions, useNavigation } from '@react-navigation/native';
 import {useFonts} from "expo-font";
 import fonts, { fontCollection } from '../utils/globals/fonts';
-import { AntDesign, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 export const Header = ({navigation}) => {
 
+    const nav = useNavigation();
     const [fontsLoaded] = useFonts(fontCollection);
     if(!fontsLoaded) return null;
 
     return(
         <View style={styles.headercontainer}>
             <View style={styles.titleContainer}>
-                <View style={styles.arrowleft}>
-                    {navigation.canGoBack() && 
-                        <Pressable onPress={() => navigation.goBack()}>
-                            <AntDesign name='arrowleft' size={25} color={'silver'}/>
-                        </Pressable>
-                        }                    
-                </View>
+                <View style={styles.menu}>
+                    <Pressable onPress={ ()=> nav.dispatch(DrawerActions.openDrawer())}>
+                        <AntDesign name='menu-fold' size={25} color={'#b4cded'}/>
+                    </Pressable>
+                </View>           
                 <View style={styles.title}>
                     <Pressable >                        
                         <Text style={styles.text}>
@@ -25,7 +25,7 @@ export const Header = ({navigation}) => {
                         </Text>
                     </Pressable>
                 </View>
-            </View>            
+            </View>             
         </View>
     )
 }
@@ -46,9 +46,12 @@ const styles = StyleSheet.create({
     title: {
         marginRight:"25%"
     },
-    arrowleft: {
-        width:"7%",
-        paddingLeft:"1%"
+    menu: {
+        top: 10,
+        padding:"3%"
+    },
+    arrowleft: {        
+        top: 10,
     },
     linksContainer: {      
         paddingHorizontal:"1%",         
@@ -78,7 +81,8 @@ const styles = StyleSheet.create({
         height:"100%",
         color:"#b4cded",
         fontSize:30,  
-        marginLeft:"25%",  
+        top: 5,
+        left: 50,  
         textAlignVertical:"center",  
         fontFamily:fonts.DosisBold     
     },    

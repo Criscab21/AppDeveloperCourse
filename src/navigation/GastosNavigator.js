@@ -1,7 +1,7 @@
-import Home from '../Components/Home';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Gastos from '../Components/Gastos';
 import { Header } from '../Components/Header';
+import HomeGastos from '../screens/HomeGastos';
+import Gastos from '../screens/Gastos';
 
 
 
@@ -11,7 +11,7 @@ export default function GastosNavigator () {
     return (
         <>
             <Stack.Navigator
-                initialRouteName='Home'
+                initialRouteName='HomeGastos'
                 screenOptions={({route}) => {
                     return {
                         header: ({navigation}) => {
@@ -20,7 +20,7 @@ export default function GastosNavigator () {
                     }
                 }}
                 >
-                <Stack.Screen name="Home" component={Home}/>
+                <Stack.Screen name="HomeGastos" component={HomeGastos}/>
                 <Stack.Screen name="Gastos" component={Gastos}/>                
             </Stack.Navigator>
         </>

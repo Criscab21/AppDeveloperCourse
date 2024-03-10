@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, Pressable } from 'react-native'
 import uuid from 'react-native-uuid';
 import { useDispatch } from 'react-redux';
 import { addIncomeItem } from '../features/income/incomeSlice';
-import { ValidationTextInput } from './ValidationTextInput';
-import IncomeCategories from './IncomeCategories';
+import IncomeCategories from '../Components/IncomeCategories';
 import { plusCategories } from '../features/incomeCategories/incomeCategoriesSlice';
+import { ValidationTextInput } from '../Components/ValidationTextInput';
 
 
 

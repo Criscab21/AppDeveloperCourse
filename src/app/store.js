@@ -6,6 +6,7 @@ import incomeCategoriesSlice from '../features/incomeCategories/incomeCategories
 import { authApi } from './services/auth';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import authSlice from '../features/auth/authSlice';
+import { profileApi } from './services/profile';
 
 export const store = configureStore({
     reducer: {
@@ -15,9 +16,10 @@ export const store = configureStore({
         categories: categoriesSlice,
         incomeCategories: incomeCategoriesSlice,
         [authApi.reducerPath]: authApi.reducer,
+        [profileApi.reducerPath]: profileApi.reducer,
     },
     middleware:(getDefaultMiddleware) => 
-        getDefaultMiddleware().concat(authApi.middleware),
+        getDefaultMiddleware().concat(authApi.middleware, profileApi.middleware),
 })
 
 setupListeners(store.dispatch)

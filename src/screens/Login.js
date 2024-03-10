@@ -14,14 +14,13 @@ const Login = ({navigation}) => {
     const [errorEmail, setErrorEmail] = useState("");
     const [errorPassword, setErrorPassword] = useState("");
     const [triggerLogin] = useLoginMutation();    
-    const dispatch = useDispatch();
-    const user = useSelector((state) => state.auth);   
+    const dispatch = useDispatch();    
        
     const onSubmit = async () => {  
         try {
             loginSchema.validateSync({email, password});
             const {data} = await triggerLogin({ email, password });         
-            dispatch(setUser({email:data.email, idToken:data.idToken})); 
+            dispatch(setUser({email:data.email, idToken:data.idToken, localId:data.localId})); 
         } catch (error) {
             setErrorEmail("");
             setPassword("");            

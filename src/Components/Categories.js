@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { View, Text, StyleSheet, Pressable, FlatList, SafeAreaView } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 

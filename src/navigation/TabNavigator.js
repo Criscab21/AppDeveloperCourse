@@ -9,7 +9,7 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
     return (
         <Tab.Navigator
-          initialRouteName='Gastos'
+          initialRouteName='GastosHome'
           screenOptions={{
             headerShown:false,
             tabBarStyle: Styles.tabbar,
