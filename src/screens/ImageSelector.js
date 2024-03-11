@@ -60,6 +60,9 @@ const styles = StyleSheet.create({
         marginTop:20
     },
     image: {
+        borderWidth:2,
+        borderColor:"black",
+        borderRadius:100,        
         width:200,
         height:200
     }

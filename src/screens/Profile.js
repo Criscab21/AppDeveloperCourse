@@ -12,7 +12,7 @@ const Profile = ({navigation}) => {
                 style={styles.image}
                 resizeMode='cover'
             />
-            <AddButton title={"Agregar imagen de perfil"} onPress={() => navigation.navigate("ImageSelector")}/>            
+            <AddButton title={"Cambiar imagen de perfil"} onPress={() => navigation.navigate("ImageSelector")}/>                        
         </View>
     )    
 }
@@ -20,12 +20,15 @@ const Profile = ({navigation}) => {
 export default Profile
 
 const styles = StyleSheet.create({
-    container:{
+    container:{        
         flex:1,
         alignItems:"center",
-        marginTop:20
+        paddingTop:20
     },
     image:{
+        borderWidth:2,
+        borderColor:"black",
+        borderRadius:100,        
         width:200,
         height:200
     }

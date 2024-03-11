@@ -6,6 +6,7 @@ import { useLoginMutation } from "../app/services/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../features/auth/authSlice";
 import { loginSchema } from "../utils/validations/authSchema";
+import LoginWith from "../Components/LoginWith";
 
 const Login = ({navigation}) => {
     
@@ -54,6 +55,8 @@ const Login = ({navigation}) => {
                     error={errorPassword}                        
                 />                           
                 <SubmitButton title='Ingresar' onPress={() => onSubmit()}/>
+                <View style={styles.subcontainer}><Text>O ingresa con ...</Text></View>
+                <LoginWith/>
                 <Text style={styles.sub}>No tiene cuenta?</Text>
                 <Pressable onPress={() => navigation.navigate("Register")}>
                     <Text style={styles.subLink}>Registro</Text>
@@ -74,15 +77,18 @@ const styles = StyleSheet.create({
     inputContainer: {
         paddingVertical:10,
         alignItems:"center",
-        width:"80%",
-        backgroundColor:"#14591d",
+        width:"80%",        
         borderRadius:10,   
     },
     title: {
-        paddingTop: "25%",
-        fontSize: 35,
-    },    
+        paddingVertical: "10%",
+        fontSize: 30,
+    },   
+    subcontainer: {
+        padding: 30,
+    },
     sub: {
+        paddingTop:30,
         fontSize:14,        
     },
     subLink: {

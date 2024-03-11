@@ -88,21 +88,21 @@ const styles = StyleSheet.create({
     inputContainer: {
         paddingVertical:10,
         alignItems:"center",
-        width:"80%",
-        backgroundColor:"#14591d",
-        borderRadius:10,   
+        width:"80%",        
+        borderRadius:10,  
     },
     title: {
-        paddingTop: "25%",
-        fontSize: 35,
+        paddingVertical: "10%",
+        fontSize: 30,
     },    
     sub: {
-        fontSize:14,        
+        paddingTop:30,
+        fontSize:14,     
     },
     subLink: {
         padding:5,
         fontSize:14,
-        color:"white"
+        color:"orange"
     },
 })
 
