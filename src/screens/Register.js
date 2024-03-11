@@ -48,21 +48,21 @@ const Register = ({navigation}) => {
                 <InputForm                       
                     value={email}
                     onChangeText={(t) => setEmail(t)}
-                    label='Email'       
+                    placeholder="Email"      
                     isSecure={false}
                     error={errorEmail}             
                 />
                 <InputForm 
                     value={password}
                     onChangeText={(t) => setPassword(t)}
-                    label='Contraseña' 
+                    placeholder="Contraseña"
                     isSecure={true}   
                     error={errorPassword}                             
                 />                           
                 <InputForm 
                     value={confirmPassword}
                     onChangeText={(t) => setConfirmPassword(t)}
-                    label='Confirmar contraseña'
+                    placeholder="Confirmar contraseña"
                     isSecure={true}
                     error={errorConfirmPassword}                                
                 />                           

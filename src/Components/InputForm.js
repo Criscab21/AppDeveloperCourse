@@ -1,10 +1,12 @@
 import { TextInput, StyleSheet, View, Text } from "react-native"
+import { MaterialIcons } from '@expo/vector-icons'
 
-const InputForm = ( {label, value, onChangeText, isSecure, error}) => {
+const InputForm = ( {iconName, value, onChangeText, isSecure, error, placeholder}) => {
     return (
         <View style={styles.inputCard}>
-            <Text style={styles.titleInput}>{label}</Text>
-            <TextInput 
+            <MaterialIcons name={iconName} size={20}/>            
+            <TextInput
+                placeholder={placeholder}
                 value={value} 
                 onChangeText={onChangeText} 
                 style={styles.input}
@@ -17,22 +19,14 @@ const InputForm = ( {label, value, onChangeText, isSecure, error}) => {
 
 const styles = StyleSheet.create({
     inputCard: {
-        width: "100%",
-        paddingBottom: 15,
-    },
-    titleInput:{
-        width:"90%",
-        marginHorizontal:"5%",
-        fontSize:16,
-    },
-    input: {        
-        width:"90%",
-        borderWidth:0,
+        flexDirection:'row',
         borderBottomWidth:1,
         borderBottomColor:"gray",
-        padding:2,
-        marginHorizontal:"5%",
-        marginVertical:10,        
+        width: "100%",
+        marginBottom:25,        
+    },  
+    input: {
+        paddingHorizontal:5,
     },
     error: {
         textAlign:"center",

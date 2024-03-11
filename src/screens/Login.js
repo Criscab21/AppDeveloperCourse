@@ -40,19 +40,21 @@ const Login = ({navigation}) => {
         <View style={styles.container}>      
             <Text style={styles.title} >Inicio de sesion</Text>
             <View style={styles.inputContainer}>
-                <InputForm                       
+                <InputForm      
+                    iconName="alternate-email"                 
                     value={email}
-                    onChangeText={(t) => setEmail(t)}                   
-                    label='Email'    
+                    onChangeText={(t) => setEmail(t)}  
                     isSecure={false}     
-                    error={errorEmail}            
+                    error={errorEmail}
+                    placeholder="Email ID"          
                 />
                 <InputForm 
+                    iconName="lock-outline"
                     value={password}
-                    onChangeText={(t) => setPassword(t)}
-                    label='Contraseña' 
+                    onChangeText={(t) => setPassword(t)}                    
                     isSecure={true}    
-                    error={errorPassword}                        
+                    error={errorPassword}
+                    placeholder="Contraseña"                     
                 />                           
                 <SubmitButton title='Ingresar' onPress={() => onSubmit()}/>
                 <View style={styles.subcontainer}><Text>O ingresa con ...</Text></View>
