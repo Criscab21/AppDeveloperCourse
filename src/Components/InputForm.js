@@ -4,7 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 const InputForm = ( {iconName, value, onChangeText, isSecure, error, placeholder}) => {
     return (
         <View style={styles.inputCard}>
-            <MaterialIcons name={iconName} size={20}/>            
+            <MaterialIcons name={iconName} size={18}/>            
             <TextInput
                 placeholder={placeholder}
                 value={value} 
@@ -12,7 +12,7 @@ const InputForm = ( {iconName, value, onChangeText, isSecure, error, placeholder
                 style={styles.input}
                 secureTextEntry={isSecure}
             />
-            {error ? <View><Text style={styles.error}>{error}</Text></View> : null}               
+            {error ? <Text style={styles.error}>{error}</Text> : null}               
         </View>
     )
 }
@@ -28,10 +28,10 @@ const styles = StyleSheet.create({
     input: {
         paddingHorizontal:5,
     },
-    error: {
-        textAlign:"center",
+    error: {        
         fontSize:14,
-        color:"red"
+        color:"red",
+        top:3,
     },  
 })
 

@@ -4,30 +4,49 @@ import {useFonts} from "expo-font";
 import fonts, { fontCollection } from '../utils/globals/fonts';
 import { AntDesign } from '@expo/vector-icons';
 
-export const Header = ({navigation}) => {
+export const Header = ({isLog}) => {
 
     const nav = useNavigation();
     const [fontsLoaded] = useFonts(fontCollection);
     if(!fontsLoaded) return null;
 
-    return(
-        <View style={styles.headercontainer}>
-            <View style={styles.titleContainer}>
-                <View style={styles.menu}>
-                    <Pressable onPress={ ()=> nav.dispatch(DrawerActions.openDrawer())}>
-                        <AntDesign name='menu-fold' size={25} color={'#b4cded'}/>
-                    </Pressable>
-                </View>           
-                <View style={styles.title}>
-                    <Pressable >                        
-                        <Text style={styles.text}>
-                            Gestor de Gastos
-                        </Text>
-                    </Pressable>
-                </View>
-            </View>             
-        </View>
-    )
+    if(isLog) {
+        return(
+            <View style={styles.headercontainer}>
+                <View style={styles.titleContainer}>
+                    <View style={styles.menu}>
+                        <Pressable onPress={ ()=> nav.dispatch(DrawerActions.openDrawer())}>
+                            <AntDesign name='menu-fold' size={25} color={'#b4cded'}/>
+                        </Pressable>
+                    </View>           
+                    <View style={styles.title}>
+                        <Pressable >                        
+                            <Text style={styles.textLog}>
+                                Gestor de Gastos
+                            </Text>
+                        </Pressable>
+                    </View>
+                </View>             
+            </View>
+        )
+    } else {
+        return(
+            <View style={styles.headercontainer}>
+                <View style={styles.titleContainer}>
+                    <View style={styles.menu}>
+                        
+                    </View>           
+                    <View style={styles.title}>
+                        <Pressable >                        
+                            <Text style={styles.text}>
+                                Gestor de Gastos
+                            </Text>
+                        </Pressable>
+                    </View>
+                </View>             
+            </View>
+        )
+    }    
 }
 
 
@@ -77,7 +96,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         color:"white",        
     },  
-    text:{                         
+    textLog:{                         
         height:"100%",
         color:"#b4cded",
         fontSize:30,  
@@ -86,4 +105,13 @@ const styles = StyleSheet.create({
         textAlignVertical:"center",  
         fontFamily:fonts.DosisBold     
     },    
+    text: {
+        height:"100%",
+        color:"#b4cded",
+        fontSize:30,  
+        top: 5,
+        left: 70,  
+        textAlignVertical:"center",  
+        fontFamily:fonts.DosisBold     
+    }
   });

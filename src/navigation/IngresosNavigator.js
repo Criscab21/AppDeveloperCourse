@@ -12,8 +12,8 @@ export default function IngresosNavigator () {
                 initialRouteName="HomeIngresos"
                 screenOptions={({route}) => {
                     return {
-                        header: ({navigation}) => {
-                            return <Header navigation={navigation}/>
+                        header: () => {
+                            return <Header isLog={true}/>
                         }
                     }
                 }}

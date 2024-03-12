@@ -10,12 +10,11 @@ const Stack = createNativeStackNavigator();
 export default function GastosNavigator () {
     return (
         <>
-            <Stack.Navigator
-                initialRouteName='HomeGastos'
-                screenOptions={({route}) => {
+            <Stack.Navigator                
+                screenOptions={({route}) => {                    
                     return {
-                        header: ({navigation}) => {
-                            return <Header navigation={navigation}/>
+                        header: () => {
+                            return <Header isLog={true}/>
                         }
                     }
                 }}

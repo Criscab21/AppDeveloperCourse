@@ -45,21 +45,24 @@ const Register = ({navigation}) => {
         <View style={styles.container}>      
             <Text style={styles.title} >Registro</Text>
             <View style={styles.inputContainer}>
-                <InputForm                       
+                <InputForm     
+                    iconName="alternate-email"                  
                     value={email}
                     onChangeText={(t) => setEmail(t)}
                     placeholder="Email"      
                     isSecure={false}
                     error={errorEmail}             
                 />
-                <InputForm 
+                <InputForm
+                    iconName="lock-outline" 
                     value={password}
                     onChangeText={(t) => setPassword(t)}
                     placeholder="Contraseña"
                     isSecure={true}   
                     error={errorPassword}                             
                 />                           
-                <InputForm 
+                <InputForm
+                    iconName="lock-outline" 
                     value={confirmPassword}
                     onChangeText={(t) => setConfirmPassword(t)}
                     placeholder="Confirmar contraseña"
