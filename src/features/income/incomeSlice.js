@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     items: [],
-    total: 0
+    value: 0
 }
 
 export const incomeSlice = createSlice ({
@@ -11,10 +11,10 @@ export const incomeSlice = createSlice ({
     reducers: {
         addIncomeItem: (state, actions) => {
             state.items = [...state.items, actions.payload];
-            state.total += Number(actions.payload.price);
+            state.value += Number(actions.payload.price);
         },
         deleteIncomeItem: (state, actions) => {
-            state.total -= Number(actions.payload.price);
+            state.value -= Number(actions.payload.price);
             state.items = state.items.filter((item)=> item.id !== actions.payload.id);
         }
     }

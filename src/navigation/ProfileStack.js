@@ -21,16 +21,13 @@ const ProfileStack = () => {
     return(
         <Stack.Navigator
             initialRouteName="Profile"
-            screenOptions={({route}) => {
+            screenOptions={() => {
                 return {
-                    header : () => {
-                        return <Header isLog={true}/> 
-                    }
+                    header : () => <Header/> 
                 }
             }}
         >
-            <Stack.Screen name="Profile" component={Profile}/>
-            <Stack.Screen name="ImageSelector" component={ImageSelector}/>
+            <Stack.Screen name="Profile" component={Profile}/>            
         </Stack.Navigator>
     )
 }

@@ -1,4 +1,5 @@
 import { Pressable, Text, StyleSheet } from "react-native"
+import { colors } from "../utils/globals/colors"
 
 const AddButton = ({title, onPress}) => {
     return (
@@ -14,15 +15,14 @@ export default AddButton
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor:"green",
-        borderRadius:25,
-        width:"70%",
+        backgroundColor: colors.cadetGrayTertiaryColor,        
+        width:"90%",
         paddingVertical:8,
         margin:10
     },
     text:{
-        color:"silver",
+        color: colors.redArrowDown,
         textAlign:"center",
-        fontSize:18
+        fontSize:14
     }
 })

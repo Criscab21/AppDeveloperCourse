@@ -21,7 +21,7 @@ const initialState = {
             color:"blue"       
         },
         {
-            name: "viaje",
+            name: "Viaje",
             value: 0,  
             iconName: "airplane",
             color:"pink"           

@@ -4,7 +4,7 @@ const initialState = {
     items: [], 
     value:0
 }
-
+ 
 export const spendSlice = createSlice ({
     name: 'items',
     initialState,

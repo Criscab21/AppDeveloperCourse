@@ -8,16 +8,18 @@ const Drawer = createDrawerNavigator();
 
 const Menu = () => {
     
-    return (        
-        <Drawer.Navigator
-            drawerContent={props => <DrawerContent {...props}/>} 
-            screenOptions={{
-                headerShown:false
-            }}>
-            <Drawer.Screen name='Inicio' component={TabNavigator}/>            
-            <Drawer.Screen name='Perfil' component={ProfileStack}/>            
-            <Drawer.Screen name='Ajustes' component={ConfigStack}/>
-        </Drawer.Navigator>       
+    return (
+        <>
+            <Drawer.Navigator
+                drawerContent={props => <DrawerContent {...props}/>} 
+                screenOptions={{
+                    headerShown:false                    
+                }}>
+                <Drawer.Screen name='HomeGastos' component={TabNavigator}/>            
+                <Drawer.Screen name='ProfileStack' component={ProfileStack}/>            
+                <Drawer.Screen name='Config' component={ConfigStack}/>
+            </Drawer.Navigator>       
+        </>
     )
 }
 

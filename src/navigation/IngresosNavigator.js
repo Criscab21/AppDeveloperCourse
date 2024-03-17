@@ -8,13 +8,11 @@ const Stack = createNativeStackNavigator ();
 export default function IngresosNavigator () {
     return (
         <>
-            <Stack.Navigator
-                initialRouteName="HomeIngresos"
-                screenOptions={({route}) => {
+            <Stack.Navigator                
+                screenOptions={({route, navigation}) => {                    
                     return {
-                        header: () => {
-                            return <Header isLog={true}/>
-                        }
+                        header: () => <Header navigation={navigation}/>
+                        
                     }
                 }}
             >

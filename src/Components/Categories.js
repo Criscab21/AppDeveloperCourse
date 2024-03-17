@@ -1,16 +1,14 @@
-import { useSelector } from "react-redux";
 import { View, Text, StyleSheet, Pressable, FlatList, SafeAreaView } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { colors } from '../utils/globals/colors';
 
-export default function Categories ({selectCategory}) {
-    
-    const categories = useSelector((state) => state.categories);    
+export default function Categories ({selectCategory, categories}) {
     
     return (
         <SafeAreaView contentContainerStyle={{flexDirection:"column"}}>
             <View style={styles.mainContainer}>
                 <FlatList
-                    data={categories.categories}
+                    data={categories}
                     numColumns={3}
                     keyExtractor={(item) => item.name}
                     renderItem={({ item }) =>
@@ -34,8 +32,10 @@ export default function Categories ({selectCategory}) {
 
 const styles = StyleSheet.create({  
     mainContainer: {  
+        marginTop: "4%",
         paddingVertical:"5%",  
-        marginHorizontal:"10%",    
+        marginHorizontal:"10%",  
+        backgroundColor: colors.shadowCircle,  
     },    
     card: {     
         width:"33%",              

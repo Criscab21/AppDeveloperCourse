@@ -6,6 +6,8 @@ import { useRegisterMutation } from "../app/services/auth";
 import { setUser } from "../features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { registerSchema } from "../utils/validations/authSchema";
+import LoginWith from "../Components/LoginWith";
+import { deleteSession, insertSession } from "../utils/db";
 
 const Register = ({navigation}) => { 
     
@@ -21,7 +23,9 @@ const Register = ({navigation}) => {
     const onSubmit = async () => {
         try {
             registerSchema.validateSync({email, password, confirmPassword});
-            const {data} = await triggerRegister({ email, password });         
+            const {data} = await triggerRegister({ email, password });
+            deleteSession();
+            insertSession(data);      
             dispatch(setUser({email:data.email, idToken:data.idToken, localId: data.localId}));  
             navigation.navigate("Login");                  
         } catch (error) {
@@ -72,6 +76,8 @@ const Register = ({navigation}) => {
                 <SubmitButton title='Registro' onPress={() => {
                         onSubmit();                        
                     }}/>   
+                <View style={{padding: 30}}><Text style={{fontSize:14}}>O registrate con ...</Text></View>
+                <LoginWith/>
                 <Text style={styles.sub}>Ya tenes cuenta?</Text>
                 <Pressable onPress={() => navigation.navigate("Login")}>
                     <Text style={styles.subLink}>Inicio de sesion</Text>
@@ -86,7 +92,8 @@ const styles = StyleSheet.create({
     container: {        
         flex: 1,         
         alignItems:"center",        
-        backgroundColor:"#F0F4EF",                           
+        backgroundColor:"#F0F4EF",  
+        marginTop: "30%",                         
     },     
     inputContainer: {
         paddingVertical:10,

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { TextInput, StyleSheet, View, Text } from "react-native";
+import { colors } from "../utils/globals/colors";
 
 export const ValidationTextInput = ({props, onHandlerPrice}) => {
     const [text, setText] = useState();    
@@ -11,29 +12,29 @@ export const ValidationTextInput = ({props, onHandlerPrice}) => {
     }
 
     return (
-        <View style={styles.container}>            
-            <TextInput 
-                onChangeText={this.onChangeText}                
-                value={text}
-                {...props}
-                keyboardType='numeric'
-                placeholder="Ingrese el monto"
-                placeholderTextColor={"#0a210f"}
-                />
-        </View>
+        <TextInput 
+            style={styles.textInput}
+            onChangeText={this.onChangeText}                
+            value={text}
+            {...props}
+            keyboardType='numeric'
+            placeholder="Ingrese el monto"
+            placeholderTextColor={"#0a210f"}
+        />            
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        width:"80%",
-        borderWidth:2,
-        borderColor:"black",
+    textInput: {
+        textAlign: 'center',        
+        backgroundColor: colors.shadowCircle,
+        borderRadius: 10,
+        width:"45%",
+        borderBottomWidth: 1,       
         marginHorizontal:"10%",
         marginVertical:5,
         paddingVertical:5,
-        paddingHorizontal:10,
-        alignSelf:"stretch",        
+        paddingHorizontal:10,           
     },
     msg: {
         color:"red",

@@ -1,5 +1,6 @@
 import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'
+import { colors } from '../utils/globals/colors';
 
 export default function TabBarIcon ({title, nameIcon, color, focused}) {
     return (
@@ -15,14 +16,13 @@ export default function TabBarIcon ({title, nameIcon, color, focused}) {
 const styles = StyleSheet.create({
     container:{
         alignItems: 'center',        
-        width:100,        
-        
+        width:100,                
     },
     text:{
         fontSize:18,
     },
     textFocused:{
-        color:'silver',
+        color: colors.licoricePrincipalText,
         fontSize:19,                
     },
     focusedContainer: {        

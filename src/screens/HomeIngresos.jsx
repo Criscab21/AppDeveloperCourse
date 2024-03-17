@@ -5,40 +5,54 @@ import { useDispatch, useSelector} from 'react-redux';
 import { deleteIncomeItem } from '../features/income/incomeSlice';
 import { subsCategories } from '../features/incomeCategories/incomeCategoriesSlice';
 import PieChartHome from '../Components/PieChartHome';
+import { colors } from '../utils/globals/colors';
 
 export default function HomeIngresos ({navigation}) {
     
+    const categories = useSelector((state) => state.incomeCategories.incomeCategories)
     const income = useSelector((state) => state.income);
     const dispatch = useDispatch();   
         
     return(             
         <View style={styles.container}>            
             <View style={styles.piechartcontainer}>
-                <PieChartHome title="Ingresos" color="green"/>
+                <View style={{     
+                    borderRadius: 20,
+                    marginTop: 10,                 
+                    backgroundColor: colors.shadowCircle,
+                }}>
+                    <PieChartHome title="Ingresos" color="#018E42" total={income.value} categories={categories}/>
+                </View>
+                
                 <View style={styles.plusButtonContainer}>                    
                     <Pressable onPress={() => navigation.navigate("Ingresos")}>
-                        <MaterialCommunityIcons name='plus-circle-multiple' size={45} color="green"/>
+                        <MaterialCommunityIcons name='plus-circle' size={65} color={colors.plusCircle}/>
                     </Pressable>            
                 </View>
             </View>
-            <ScrollView style={styles.flatlistCard}>                
+            <ScrollView style={styles.scrollView}>                
                 {income.items.map((item) => {
                     return (
                         <View key={item.id} style={styles.card}>
                             <View style={styles.textCard}>
-                                <Text style={styles.text}>
-                                    {item.category}                                
-                                </Text>
+                                <View style={{flexDirection: 'row'}}>
+                                    <Text style={[{}, styles.text]}>
+                                        {item.category}
+                                    </Text>
+                                    <View style={[styles.iconContainer, {backgroundColor:item.color}]}>
+                                        <MaterialCommunityIcons name={item.iconName} size={10} color={"white"}/>
+                                    </View>
+                                </View>         
                                 <Text style={styles.text}>
                                     $ {item.price}                          
                                 </Text>
                             </View>
-                            <View>
+                            <View style={{alignItems:'center'}}>
                                 <Pressable onPress={() => {
                                         dispatch(deleteIncomeItem(item))
                                         dispatch(subsCategories(item))
                                         }}>              
-                                    <FontAwesome name='trash' size={30}/>
+                                    <FontAwesome name='trash' size={30} color={colors.licoriceSecundaryText}/>
                                 </Pressable>
                             </View>
                         </View> 
@@ -50,47 +64,50 @@ export default function HomeIngresos ({navigation}) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,          
-        minWidth:"100%",
-        backgroundColor:"#F0F4EF",                           
+    container: {        
+        flex: 1,        
+        backgroundColor: colors.lavenderSecundaryColor,                             
     },     
+    scrollView: {
+        marginBottom:"26%",        
+        paddingVertical:10 ,        
+    },
     piechartcontainer:{
         paddingHorizontal:"10%",
-        marginHorizontal:"10%",        
-        borderWidth:1,        
-        backgroundColor: "gray",
-        borderRadius:20
+        marginHorizontal:"10%",
+        borderRadius: 100,  
     },        
-    plusButtonContainer:{ 
+    plusButtonContainer:{         
         borderRadius:50,
-        backgroundColor:"gold",
-        borderWidth:1,
-        borderColor:"gold",
-        paddingLeft:"1%",
-        marginLeft:"70%",
-        marginBottom:"2%",
-        marginRight:"8%",
+        alignSelf: 'center',
     },
-    flatlistCard: {
-        marginBottom:"26%",        
-        paddingVertical:10 ,
-    },
-    card: {
-        borderWidth:1,        
-        backgroundColor: "gray",
-        borderRadius:20,
-        alignItems:"center",        
+    card: {        
+        shadowOpacity: 0.8,
+        shadowRadius: 12,
+        shadowColor: colors.licoricePrincipalText,        
+        shadowRadius: 1,
+        elevation: 5,  
+        borderRadius:20,                
         paddingVertical:5,
         marginBottom:20,
         marginHorizontal:"10%",
+        backgroundColor: colors.cadetGrayTertiaryColor,
 
     },    
-    textCard: {
-        alignItems:'center'
+    textCard: {        
+        flexDirection: "row",
+        justifyContent: 'space-between',
     },
     text: {
-        color:"#b4cded",
+        color: colors.licoriceSecundaryText,
         fontSize: 15,
-    }
-  });
+        paddingHorizontal: 10,
+    },
+    iconContainer: {                
+        width: 20,   
+        height: 20,   
+        borderWidth:1,        
+        borderRadius:100, 
+    },
+}
+)

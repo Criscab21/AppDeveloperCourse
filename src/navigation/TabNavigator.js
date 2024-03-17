@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import IngresosNavigator from './IngresosNavigator';
 import TabBarIcon from '../Components/TabBarIcon';
 import { StyleSheet } from 'react-native';
+import { colors } from '../utils/globals/colors';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,8 +13,8 @@ const TabNavigator = () => {
           initialRouteName='GastosHome'
           screenOptions={{
             headerShown:false,
-            tabBarStyle: Styles.tabbar,
             tabBarShowLabel:false,           
+            tabBarStyle: Styles.tabbar,
           }
           }
         >
@@ -22,7 +23,7 @@ const TabNavigator = () => {
             component={GastosNavigator}
             options={{
               tabBarIcon: ({focused}) => {
-                return <TabBarIcon title={'Gastos'} nameIcon={'level-down'} color={"red"} focused={focused}/>
+                return <TabBarIcon title={'Gastos'} nameIcon={'level-down'} color={colors.redArrowDown} focused={focused}/>
               }
             }}
             />
@@ -31,7 +32,7 @@ const TabNavigator = () => {
             component={IngresosNavigator}
             options={{
               tabBarIcon: ({focused}) => {
-                return <TabBarIcon title={'Ingresos'} nameIcon={'level-up'} color={"gold"} focused={focused}/>
+                return <TabBarIcon title={'Ingresos'} nameIcon={'level-up'} color={colors.greenArrowUp} focused={focused}/>
               }
             }}
             />
@@ -41,15 +42,9 @@ const TabNavigator = () => {
 
 const Styles = StyleSheet.create({
   tabbar: {
-    backgroundColor:"#14591d",
-    height:80,
-    shadowColor:'silver',
-    elevation:4,
-    position:'absolute',
-    borderRadius:15,
-    bottom:25,
-    left:20,
-    right:20,        
+    backgroundColor: colors.payneGrayPrincipalColor,    
+    height:80,    
+    position:'absolute', 
   }
 })
 

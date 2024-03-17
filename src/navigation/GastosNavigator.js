@@ -3,19 +3,15 @@ import { Header } from '../Components/Header';
 import HomeGastos from '../screens/HomeGastos';
 import Gastos from '../screens/Gastos';
 
-
-
 const Stack = createNativeStackNavigator();
 
 export default function GastosNavigator () {
     return (
         <>
             <Stack.Navigator                
-                screenOptions={({route}) => {                    
+                screenOptions={({route, navigation}) => {                    
                     return {
-                        header: () => {
-                            return <Header isLog={true}/>
-                        }
+                        header: () => <Header navigation={navigation}/>                       
                     }
                 }}
                 >

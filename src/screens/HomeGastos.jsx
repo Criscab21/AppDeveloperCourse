@@ -5,44 +5,61 @@ import { FontAwesome } from '@expo/vector-icons';
 import { deleteSpendItem } from '../features/spend/spendSlice'
 import { subsCategories } from '../features/categories/categoriesSlice';
 import PieChartHome from '../Components/PieChartHome';
+import { colors } from '../utils/globals/colors';
 
 
 export default function HomeGastos ({navigation}) {     
 
-    const spents = useSelector((state)=> state.spends);
-    const dispatch = useDispatch();        
+    const categories = useSelector((state) => state.categories.categories)
+    const expenses = useSelector((state)=> state.spends);
+    const dispatch = useDispatch(); 
+    
+    //HACER UNA FUNCION QUE BUSQUE EL NOMBRE DE LA CATEGORIA A PARTIR DE EXPENSES
+    function searchCategory (name) {
+        categories.categories.find((name) => {
+            return [categories.categories.iconName, categories.categories.color]
+        })
+    }
 
     return(             
         <View style={styles.container}>            
             <View style={styles.piechartcontainer}>
-                <PieChartHome title="Gastos" color="red"/>                
+                <View style={{     
+                    borderRadius: 20,
+                    marginTop: 10,                 
+                    backgroundColor: colors.shadowCircle,
+                }}>
+                    <PieChartHome title="Gastos" color="red" total={expenses.value} categories={categories}/>                
+                </View>
                 <View style={styles.plusButtonContainer}>                    
                     <Pressable onPress={() => navigation.navigate("Gastos")}>
-                        <MaterialCommunityIcons name='plus-circle-multiple' size={45} color="green"/>
+                        <MaterialCommunityIcons name='plus-circle' size={65} color={colors.plusCircle}/>
                     </Pressable>    
                 </View>                    
             </View>            
             <ScrollView style={styles.scrollView}>
-                {spents.items.map((item) => {  
+                {expenses.items.map((item) => {  
                     return (
                         <View key={item.id} style={styles.card}>
                             <View style={styles.textCard}>
-                                <Text style={styles.text}>
-                                    {item.name}                                
-                                </Text>
-                                <Text style={styles.text}>
-                                    Categoria: {item.category}                                
-                                </Text>
-                                <Text style={styles.text}>
+                                <View style={{flexDirection: 'row'}}>
+                                    <Text style={[{}, styles.text]}>
+                                        {item.category}
+                                    </Text>
+                                    <View style={[styles.iconContainer, {backgroundColor:item.color}]}>
+                                        <MaterialCommunityIcons name={item.iconName} size={10} color={"white"}/>
+                                    </View>
+                                </View>                               
+                                <Text style={[{}, styles.text]}>
                                     $ {item.price}                                
                                 </Text>
                             </View>
-                            <View>
+                            <View style={{alignItems:'center'}}>
                                 <Pressable onPress={() => {
                                         dispatch(deleteSpendItem(item));
                                         dispatch(subsCategories(item));
                                         } }>
-                                    <FontAwesome name='trash' size={30}/>
+                                    <FontAwesome name='trash' size={30} color={colors.licoriceSecundaryText}/>
                                 </Pressable>
                             </View>
                         </View>
@@ -55,46 +72,49 @@ export default function HomeGastos ({navigation}) {
 
 const styles = StyleSheet.create({
     container: {        
-        flex: 1,          
-        minWidth:"100%",
-        backgroundColor:"#F0F4EF",                             
+        flex: 1,        
+        backgroundColor: colors.lavenderSecundaryColor,                             
     },     
     scrollView: {
         marginBottom:"26%",        
-        paddingVertical:10 ,
+        paddingVertical:10 ,        
     },
     piechartcontainer:{
         paddingHorizontal:"10%",
-        marginHorizontal:"10%",        
-        borderWidth:1,        
-        backgroundColor: "gray",
-        borderRadius:20
+        marginHorizontal:"10%",
+        borderRadius: 100,  
     },        
-    plusButtonContainer:{ 
+    plusButtonContainer:{         
         borderRadius:50,
-        backgroundColor:"gold",
-        borderWidth:1,
-        borderColor:"gold",
-        paddingLeft:"1%",
-        marginLeft:"70%",
-        marginBottom:"2%",
-        marginRight:"8%",
+        alignSelf: 'center',
     },
-    card: {
-        borderWidth:1,        
-        backgroundColor: "gray",
-        borderRadius:20,
-        alignItems:"center",        
+    card: {        
+        shadowOpacity: 0.8,
+        shadowRadius: 12,
+        shadowColor: colors.licoricePrincipalText,        
+        shadowRadius: 1,
+        elevation: 5,  
+        borderRadius:20,                
         paddingVertical:5,
         marginBottom:20,
         marginHorizontal:"10%",
+        backgroundColor: colors.cadetGrayTertiaryColor,
 
     },    
-    textCard: {
-        alignItems:'center'
+    textCard: {        
+        flexDirection: "row",
+        justifyContent: 'space-between',
     },
     text: {
-        color:"#b4cded",
+        color: colors.licoriceSecundaryText,
         fontSize: 15,
-    }
-  });
+        paddingHorizontal: 10,
+    },
+    iconContainer: {                
+        width: 20,   
+        height: 20,   
+        borderWidth:1,        
+        borderRadius:100, 
+    },
+}
+)

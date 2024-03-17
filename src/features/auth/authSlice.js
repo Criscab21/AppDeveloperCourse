@@ -5,7 +5,8 @@ const initialState = {
         email: null,
         idToken: null,
         localId: null,
-        imageCamera: null
+        imageCamera: null,
+        userName: null,
     },
 }
 
@@ -14,24 +15,30 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, actions) => {            
-            state.value = {                
+            state.value = {  
+                userName: "User",              
                 imageCamera: null,
                 email: actions.payload.email,
                 idToken: actions.payload.idToken,
                 localId: actions.payload.localId
             }            
         },        
-        clearUser: (state) => (state.value = { email:null, idToken:null, localId:null }),
+        clearUser: (state) => {state.value =  {email:null, idToken:null}},
         setCameraImage: (state, actions) => {            
            state.value = {
                 ...state.value,
                 imageCamera: actions.payload
            }
-
         },
+        setNameUser: (state, actions) => {
+            state.value = {
+                ...state.value,
+                userName: actions.payload
+            }
+        }
     },
 })
 
 
-export const { setUser, clearUser, setCameraImage } = authSlice.actions;
+export const { setUser, clearUser, setCameraImage, setNameUser} = authSlice.actions;
 export default authSlice.reducer

@@ -5,6 +5,7 @@ import * as ImagePicker from 'expo-image-picker'
 import { useGetImageQuery, usePutImaGeMutation } from "../app/services/profile";
 import { useDispatch, useSelector } from "react-redux";
 import { setCameraImage } from "../features/auth/authSlice";
+import { colors } from "../utils/globals/colors";
 
 const ImageSelector = ({navigation}) => {
     const [image, setImage] = useState("");    
@@ -56,14 +57,15 @@ export default ImageSelector
 const styles = StyleSheet.create({
     container: {
         flex:1,
+        backgroundColor: colors.lavenderSecundaryColor,
         alignItems:"center",
-        marginTop:20
+        paddingTop:20
     },
     image: {
         borderWidth:2,
         borderColor:"black",
         borderRadius:100,        
-        width:200,
-        height:200
+        width:180,
+        height:180
     }
 })

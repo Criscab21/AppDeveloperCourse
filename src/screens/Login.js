@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../features/auth/authSlice";
 import { loginSchema } from "../utils/validations/authSchema";
 import LoginWith from "../Components/LoginWith";
+import { insertSession } from "../utils/db";
 
 const Login = ({navigation}) => {
     
@@ -20,7 +21,8 @@ const Login = ({navigation}) => {
     const onSubmit = async () => {  
         try {
             loginSchema.validateSync({email, password});
-            const {data} = await triggerLogin({ email, password });         
+            const {data} = await triggerLogin({ email, password }); 
+            insertSession(data);
             dispatch(setUser({email:data.email, idToken:data.idToken, localId:data.localId})); 
         } catch (error) {
             setErrorEmail("");
@@ -30,7 +32,7 @@ const Login = ({navigation}) => {
                     break
                 case "password": setErrorPassword(error.message);
                     break               
-                default:
+                default:console.log(error)
                     break
             }
         }        
@@ -74,7 +76,8 @@ const styles = StyleSheet.create({
     container: {        
         flex: 1,         
         alignItems:"center",        
-        backgroundColor:"#F0F4EF",                                
+        backgroundColor:"#F0F4EF", 
+        marginTop: "30%",
     },     
     inputContainer: {
         paddingVertical:10,
