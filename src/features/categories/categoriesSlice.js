@@ -56,15 +56,15 @@ export const categoriesSlice = createSlice({
         },
         plusCategories: (state, actions) => {            
             state.categories.find((item) => {
-                if(item.name === actions.payload.category) {
-                    item.value += Number(actions.payload.price);
+                if(item.name === actions.payload.category) {                    
+                    item.value += Number(actions.payload.amount);
                     }
                 })
         },
         subsCategories: (state, actions) => {
             state.categories.find((item) => {                
                 if(item.name === actions.payload.category) {
-                    item.value -= Number(actions.payload.price);
+                    item.value -= Number(actions.payload.amount);
                 }                
             })  
         }        

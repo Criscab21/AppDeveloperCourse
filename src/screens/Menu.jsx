@@ -15,7 +15,7 @@ const Menu = () => {
                 screenOptions={{
                     headerShown:false                    
                 }}>
-                <Drawer.Screen name='HomeGastos' component={TabNavigator}/>            
+                <Drawer.Screen name='HomeExpenses' component={TabNavigator}/>            
                 <Drawer.Screen name='ProfileStack' component={ProfileStack}/>            
                 <Drawer.Screen name='Config' component={ConfigStack}/>
             </Drawer.Navigator>       

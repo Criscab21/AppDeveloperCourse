@@ -8,4 +8,5 @@ export const colors = {
     redArrowDown: "#ED1D1D",
     plusCircle: "#E1BC29",
     shadowCircle: "#D4DDED",
+    componentBackground: "#A7B8DD",
 }

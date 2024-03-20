@@ -1,57 +1,53 @@
 import { View, Text, ScrollView, StyleSheet, Pressable } from 'react-native'
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesome } from '@expo/vector-icons';
 import { deleteSpendItem } from '../features/spend/spendSlice'
 import { subsCategories } from '../features/categories/categoriesSlice';
 import PieChartHome from '../Components/PieChartHome';
 import { colors } from '../utils/globals/colors';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
-export default function HomeGastos ({navigation}) {     
+export default function ExpensesHome ({navigation}) {     
 
     const categories = useSelector((state) => state.categories.categories)
     const expenses = useSelector((state)=> state.spends);
     const dispatch = useDispatch(); 
     
-    //HACER UNA FUNCION QUE BUSQUE EL NOMBRE DE LA CATEGORIA A PARTIR DE EXPENSES
-    function searchCategory (name) {
-        categories.categories.find((name) => {
-            return [categories.categories.iconName, categories.categories.color]
-        })
-    }
-
+    
     return(             
         <View style={styles.container}>            
             <View style={styles.piechartcontainer}>
-                <View style={{     
+                <View style={{ 
                     borderRadius: 20,
-                    marginTop: 10,                 
-                    backgroundColor: colors.shadowCircle,
+                    width: "90%",
+                    backgroundColor: colors.componentBackground,
                 }}>
-                    <PieChartHome title="Gastos" color="red" total={expenses.value} categories={categories}/>                
+                    <PieChartHome 
+                        title="Gastos" 
+                        color={colors.redArrowDown} 
+                        total={expenses.value} 
+                        categories={categories} 
+                        navigation={navigation} 
+                        navigateTo={"Expenses"}
+                    /> 
                 </View>
-                <View style={styles.plusButtonContainer}>                    
-                    <Pressable onPress={() => navigation.navigate("Gastos")}>
-                        <MaterialCommunityIcons name='plus-circle' size={65} color={colors.plusCircle}/>
-                    </Pressable>    
-                </View>                    
             </View>            
             <ScrollView style={styles.scrollView}>
                 {expenses.items.map((item) => {  
                     return (
-                        <View key={item.id} style={styles.card}>
+                        <Pressable key={item.id} style={styles.card} onPress={() => navigation.navigate("DetailExpenses")}>
                             <View style={styles.textCard}>
                                 <View style={{flexDirection: 'row'}}>
-                                    <Text style={[{}, styles.text]}>
+                                    <Text style={styles.text}>
                                         {item.category}
-                                    </Text>
-                                    <View style={[styles.iconContainer, {backgroundColor:item.color}]}>
-                                        <MaterialCommunityIcons name={item.iconName} size={10} color={"white"}/>
+                                    </Text>     
+                                    <View style={[styles.iconContainer, {backgroundColor: item.color}]}>
+                                        <MaterialCommunityIcons name={item.iconName} size={20} color={"white"}/>
                                     </View>
                                 </View>                               
                                 <Text style={[{}, styles.text]}>
-                                    $ {item.price}                                
+                                    $ {item.amount}                                
                                 </Text>
                             </View>
                             <View style={{alignItems:'center'}}>
@@ -62,7 +58,7 @@ export default function HomeGastos ({navigation}) {
                                     <FontAwesome name='trash' size={30} color={colors.licoriceSecundaryText}/>
                                 </Pressable>
                             </View>
-                        </View>
+                        </Pressable>
                         )
                 })}                        
             </ScrollView>            
@@ -80,25 +76,21 @@ const styles = StyleSheet.create({
         paddingVertical:10 ,        
     },
     piechartcontainer:{
-        paddingHorizontal:"10%",
-        marginHorizontal:"10%",
-        borderRadius: 100,  
+        alignItems: 'center',
+        marginTop: 20,         
     },        
-    plusButtonContainer:{         
-        borderRadius:50,
-        alignSelf: 'center',
-    },
     card: {        
+        alignSelf: 'center',
         shadowOpacity: 0.8,
         shadowRadius: 12,
         shadowColor: colors.licoricePrincipalText,        
         shadowRadius: 1,
         elevation: 5,  
-        borderRadius:20,                
+        borderRadius: 20,               
         paddingVertical:5,
         marginBottom:20,
-        marginHorizontal:"10%",
-        backgroundColor: colors.cadetGrayTertiaryColor,
+        width: "90%",     
+        backgroundColor: colors.componentBackground,
 
     },    
     textCard: {        
@@ -110,9 +102,10 @@ const styles = StyleSheet.create({
         fontSize: 15,
         paddingHorizontal: 10,
     },
-    iconContainer: {                
-        width: 20,   
-        height: 20,   
+    iconContainer: {
+        alignItems: 'center',        
+        width: 25,   
+        height: 25,   
         borderWidth:1,        
         borderRadius:100, 
     },

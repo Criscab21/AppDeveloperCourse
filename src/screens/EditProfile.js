@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
         color: "gray",
     },
     centeredView: {
+        backgroundColor: "rgba(0,0,0,0.8)",
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',

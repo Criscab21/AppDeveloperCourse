@@ -7,7 +7,7 @@ import { subsCategories } from '../features/incomeCategories/incomeCategoriesSli
 import PieChartHome from '../Components/PieChartHome';
 import { colors } from '../utils/globals/colors';
 
-export default function HomeIngresos ({navigation}) {
+export default function IncomeHome ({navigation}) {
     
     const categories = useSelector((state) => state.incomeCategories.incomeCategories)
     const income = useSelector((state) => state.income);
@@ -18,17 +18,18 @@ export default function HomeIngresos ({navigation}) {
             <View style={styles.piechartcontainer}>
                 <View style={{     
                     borderRadius: 20,
-                    marginTop: 10,                 
-                    backgroundColor: colors.shadowCircle,
+                    width: "90%",
+                    backgroundColor: colors.componentBackground,
                 }}>
-                    <PieChartHome title="Ingresos" color="#018E42" total={income.value} categories={categories}/>
-                </View>
-                
-                <View style={styles.plusButtonContainer}>                    
-                    <Pressable onPress={() => navigation.navigate("Ingresos")}>
-                        <MaterialCommunityIcons name='plus-circle' size={65} color={colors.plusCircle}/>
-                    </Pressable>            
-                </View>
+                    <PieChartHome 
+                        title="Ingresos" 
+                        color="#018E42" 
+                        total={income.value} 
+                        categories={categories} 
+                        navigation={navigation} 
+                        navigateTo={"Income"}
+                    />
+                </View>                
             </View>
             <ScrollView style={styles.scrollView}>                
                 {income.items.map((item) => {
@@ -39,12 +40,14 @@ export default function HomeIngresos ({navigation}) {
                                     <Text style={[{}, styles.text]}>
                                         {item.category}
                                     </Text>
-                                    <View style={[styles.iconContainer, {backgroundColor:item.color}]}>
-                                        <MaterialCommunityIcons name={item.iconName} size={10} color={"white"}/>
-                                    </View>
+                                    <Pressable onPress={() => console.log(item)}>
+                                        <View style={[styles.iconContainer, {backgroundColor: item.color}]}>
+                                            <MaterialCommunityIcons name={item.iconName} size={20} color={"white"}/>
+                                        </View>
+                                    </Pressable>
                                 </View>         
                                 <Text style={styles.text}>
-                                    $ {item.price}                          
+                                    $ {item.amount}                          
                                 </Text>
                             </View>
                             <View style={{alignItems:'center'}}>
@@ -73,25 +76,21 @@ const styles = StyleSheet.create({
         paddingVertical:10 ,        
     },
     piechartcontainer:{
-        paddingHorizontal:"10%",
-        marginHorizontal:"10%",
-        borderRadius: 100,  
-    },        
-    plusButtonContainer:{         
-        borderRadius:50,
-        alignSelf: 'center',
-    },
+        alignItems: 'center',
+        marginTop: 20,      
+    },      
     card: {        
+        alignSelf: 'center',
         shadowOpacity: 0.8,
         shadowRadius: 12,
         shadowColor: colors.licoricePrincipalText,        
         shadowRadius: 1,
         elevation: 5,  
-        borderRadius:20,                
+        borderRadius: 20,               
         paddingVertical:5,
         marginBottom:20,
-        marginHorizontal:"10%",
-        backgroundColor: colors.cadetGrayTertiaryColor,
+        width: "90%",     
+        backgroundColor: colors.componentBackground,
 
     },    
     textCard: {        
@@ -103,9 +102,10 @@ const styles = StyleSheet.create({
         fontSize: 15,
         paddingHorizontal: 10,
     },
-    iconContainer: {                
-        width: 20,   
-        height: 20,   
+    iconContainer: {
+        alignItems: 'center',        
+        width: 25,   
+        height: 25,   
         borderWidth:1,        
         borderRadius:100, 
     },

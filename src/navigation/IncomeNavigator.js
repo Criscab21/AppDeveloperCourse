@@ -1,23 +1,22 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { Header } from '../Components/Header';
-import HomeIngresos from "../screens/HomeIngresos";
-import Ingresos from "../screens/Ingresos";
+import IncomeHome from "../screens/IncomeHome";
+import Income from "../screens/Income";
 
 const Stack = createNativeStackNavigator ();
 
-export default function IngresosNavigator () {
+export default function IncomeNavigator () {
     return (
         <>
             <Stack.Navigator                
                 screenOptions={({route, navigation}) => {                    
                     return {
-                        header: () => <Header navigation={navigation}/>
-                        
+                        header: () => <Header navigation={navigation}/>                        
                     }
                 }}
             >
-                <Stack.Screen name="HomeIngresos" component={HomeIngresos}/>
-                <Stack.Screen name="Ingresos" component={Ingresos}/>
+                <Stack.Screen name="IncomeHome" component={IncomeHome}/>
+                <Stack.Screen name="Income" component={Income}/>
             </Stack.Navigator>
         </>
     )

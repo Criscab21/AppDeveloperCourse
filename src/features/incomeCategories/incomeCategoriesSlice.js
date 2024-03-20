@@ -34,19 +34,19 @@ export const IncomeCategoriesSlice = createSlice({
     initialState,
     reducers: {
         addNewCategorie: (state, actions) => {
-            state.incomeCategories = [...state.categories, actions.payload];
+            state.incomeCategories = [...state.incomeCategories, actions.payload];
         },
         plusCategories: (state, actions) => {            
             state.incomeCategories.find((item) => {
                 if(item.name === actions.payload.category) {                    
-                    item.value += Number(actions.payload.price);
+                    item.value += Number(actions.payload.amount);
                     }
                 })
         },
         subsCategories: (state, actions) => {
             state.incomeCategories.find((item) => {                
                 if(item.name === actions.payload.category) {
-                    item.value -= Number(actions.payload.price);
+                    item.value -= Number(actions.payload.amount);
                 }                
             })  
         }        

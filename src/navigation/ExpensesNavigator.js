@@ -1,11 +1,13 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Header } from '../Components/Header';
-import HomeGastos from '../screens/HomeGastos';
-import Gastos from '../screens/Gastos';
+import DetailExpenses from '../screens/DetailExpenses';
+import Expenses from '../screens/Expenses';
+import ExpensesHome from '../screens/ExpensesHome';
+
 
 const Stack = createNativeStackNavigator();
 
-export default function GastosNavigator () {
+export default function ExpensesNavigator () {
     return (
         <>
             <Stack.Navigator                
@@ -15,8 +17,9 @@ export default function GastosNavigator () {
                     }
                 }}
                 >
-                <Stack.Screen name="HomeGastos" component={HomeGastos}/>
-                <Stack.Screen name="Gastos" component={Gastos}/>                
+                <Stack.Screen name="HomeExpenses" component={ExpensesHome}/>
+                <Stack.Screen name="Expenses" component={Expenses}/>                
+                <Stack.Screen name="DetailExpenses" component={DetailExpenses}/>                
             </Stack.Navigator>
         </>
     )

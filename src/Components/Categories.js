@@ -2,8 +2,8 @@ import { View, Text, StyleSheet, Pressable, FlatList, SafeAreaView } from 'react
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from '../utils/globals/colors';
 
-export default function Categories ({selectCategory, categories}) {
-    
+export default function Categories ({onHandlerCategory, categories}) {
+       
     return (
         <SafeAreaView contentContainerStyle={{flexDirection:"column"}}>
             <View style={styles.mainContainer}>
@@ -14,11 +14,12 @@ export default function Categories ({selectCategory, categories}) {
                     renderItem={({ item }) =>
                     (
                         <View style={styles.card}>
-                            <View style={[styles.iconContainer, {backgroundColor:item.color}]}>
-                                <Pressable onPress={() => selectCategory(item.name)}>
-                                    <MaterialCommunityIcons name={item.iconName} size={20} color={"white"}/>
-                                </Pressable>
-                            </View>                            
+                            <Pressable style={[styles.iconContainer, {backgroundColor:item.color}]} 
+                                onPress={() => {                                                                          
+                                    onHandlerCategory(item.name, item.iconName, item.color)                                    
+                                }}>
+                                <MaterialCommunityIcons name={item.iconName} size={20} color={"white"}/>
+                            </Pressable>
                             <Text style={styles.text}>
                                 {item.name}                                
                             </Text> 
@@ -32,10 +33,11 @@ export default function Categories ({selectCategory, categories}) {
 
 const styles = StyleSheet.create({  
     mainContainer: {  
+        borderRadius: 20,
         marginTop: "4%",
         paddingVertical:"5%",  
         marginHorizontal:"10%",  
-        backgroundColor: colors.shadowCircle,  
+        backgroundColor: colors.componentBackground,  
     },    
     card: {     
         width:"33%",              

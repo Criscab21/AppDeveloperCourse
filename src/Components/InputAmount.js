@@ -1,43 +1,13 @@
-import { useState } from 'react'
 import { TextInput, View, Text, StyleSheet, Pressable, KeyboardAvoidingView } from 'react-native'
-import uuid from 'react-native-uuid';
-import { useDispatch, useSelector } from 'react-redux';
-import { addSpendItem } from '../features/spend/spendSlice'
 import Categories from '../Components/Categories';
-import { plusCategories } from '../features/categories/categoriesSlice';
 import { ValidationTextInput } from '../Components/ValidationTextInput';
 import { colors } from '../utils/globals/colors';
+import { useDispatch } from 'react-redux';
 
 
-export default function Gastos ({navigation}) {    
+const InputAmount = ({onHandlerAmount, onHandlerComentary, item, onHandlerCategory, categories, text, navigation, addItem, plusCategory}) => {
 
-    const dispatch = useDispatch();
-    const categories = useSelector((state) => state.categories.categories)
-
-    const [newSpent, setNewSpent] = useState({
-        name: "",
-        price: "",
-        paymentMethod: "",
-        category: "",
-        id: ""
-    })
-    
-    const onHandlerTitle = (t) => {        
-        setNewSpent({...newSpent, name:t});
-    }
-
-    const onHandlerPrice = (p) => {
-        const id = uuid.v4();
-        setNewSpent({...newSpent, price:p, id:id});
-    }
-
-    const onHandlerPayment = (p) => {
-        setNewSpent({...newSpent, paymentMethod:p});
-    }
-
-    const onHandlerCategory = (c) => {
-        setNewSpent({...newSpent, category:c})                
-    }   
+    const dispatch = useDispatch()
 
     return (        
         <View style={styles.container}>                                                
@@ -45,29 +15,32 @@ export default function Gastos ({navigation}) {
                 <View style={{alignItems: 'center'}}>
                     <ValidationTextInput                    
                         regex={/^\d{3}-\d{3-\d{4}$/}  
-                        onHandlerPrice={onHandlerPrice}                                   
+                        onHandlerPrice={onHandlerAmount}                                   
                     />  
                 </View>                                  
                 <View style={{alignItems: 'center'}}>
                     <TextInput 
                         style={styles.input}                    
-                        value={newSpent.name} 
-                        onChangeText={onHandlerTitle} 
+                        value={item.name} 
+                        onChangeText={onHandlerComentary} 
                         placeholder='Comentario' 
                         placeholderTextColor={"#0a210f"}
                     />   
                 </View>                                  
                 <View>
-                    <Categories selectCategory = {onHandlerCategory} categories={categories}/>
+                    <Categories 
+                        onHandlerCategory={onHandlerCategory}                        
+                        categories={categories}
+                        />
                 </View>
                 <View style={{marginTop: "15%", marginHorizontal: "15%"}}>
                     <Pressable onPress={() =>{
-                        dispatch(addSpendItem(newSpent)); 
-                        dispatch(plusCategories(newSpent));              
+                        dispatch(addItem(item)); 
+                        dispatch(plusCategory(item));                                                         
                         navigation.goBack();
                         }}>
                         <View style={styles.button}>
-                            <Text style={styles.text}>Añadir transaccion</Text>               
+                            <Text style={styles.text}>{text}</Text>               
                         </View>
                     </Pressable>    
                 </View>   
@@ -104,3 +77,5 @@ const styles = StyleSheet.create({
         fontSize: 15,   
     }, 
 })
+
+export default InputAmount

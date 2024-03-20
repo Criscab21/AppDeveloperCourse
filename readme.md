@@ -22,16 +22,17 @@ Una aplicacion para gestionar los gastos e ingresos personales desarrollada con 
 - Muestra un grafico Donut con todos los gastos e ingresos añadidos por el usuario y el detalle de cada uno mas abajo.
 - Al hacer click en el boton 'Mas' (+) se navega a la pantalla para añadir una nueva transaccion.
 
-<img src="./screenshots/Screenshot_20240317_180708.png" width='200'>
-<img src="./screenshots/Screenshot_20240317_180738.png" width='200'>
+<img src="./screenshots/homegastos.png" width='200'>
+<img src="./screenshots/homeingresos.png" width='200'>
 
 ### Pantalla de Gastos e Ingresos
 
-- Muestra botones arriba para añadir el precio y una descripcion breve y mas abajo todas las categorias para seleccionar una.
-- Al hacer click en el boton se agregara el gasto a la pantalla de Home.
+- Muestra botones arriba para añadir el monto y una descripcion breve y mas abajo todas las categorias para seleccionar una.
+- Al hacer click en el boton se agregara la transaccion a la pantalla de HomeGasto/Ingreso.
+- Al hacer click en el icono de basurero en las burbujas de montos/categorias se elimina este.
 
-<img src="./screenshots/Screenshot_20240317_180753.png" width='200'>
-<img src="./screenshots/Screenshot_20240317_180802.png" width='200'>
+<img src="./screenshots/Gastos.png" width='200'>
+<img src="./screenshots/Ingresos.png" width='200'>
 
 ### Navegador Inferior
 
@@ -89,7 +90,7 @@ const TabNavigator = () => {
 
 <img src="./screenshots/Screenshot_20240317_180824.png" width='200'>
 <img src="./screenshots/Screenshot_20240317_180854.png" width='200'>
-<img src="./screenshots/Screenshot_20240317_181115.png" width='200'>
+<img src="./screenshots/editarperfil.png" width='200'>
 <img src="./screenshots/Screenshot_20240317_181128.png" width='200'>
 
 

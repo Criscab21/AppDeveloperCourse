@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextInput, StyleSheet, View, Text } from "react-native";
+import { TextInput, StyleSheet } from "react-native";
 import { colors } from "../utils/globals/colors";
 
 export const ValidationTextInput = ({props, onHandlerPrice}) => {
